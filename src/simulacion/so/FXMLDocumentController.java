@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import Procesos.*;
 import java.util.ArrayList;
+import javafx.scene.control.RadioButton;
 
 /**
  *
@@ -24,12 +25,27 @@ public class FXMLDocumentController implements Initializable{
     public static ArrayList<Proceso> colaProcesos = new ArrayList<Proceso>();
     GeneradorProcesos g = new GeneradorProcesos();
     FCFS f = new FCFS();
-    
+    @FXML
+    RadioButton rbFCFS,rbSJF,rbPrioridad,rbRR,rbCM;
     
     @FXML
     private void IniciarSimulador(ActionEvent event) {
         g.activaHilo();
-        f.activaHilo();
+        if (rbFCFS.isSelected()) {
+            f.activaHilo();
+        }
+        if (rbSJF.isSelected()) {
+            
+        }
+        if (rbPrioridad.isSelected()) {
+            
+        }
+        if (rbRR.isSelected()) {
+            
+        }
+        if (rbCM.isSelected()) {
+            
+        }
         //System.out.println("algo---" + colaProcesos.get(0).nombre);
         
     }
@@ -42,7 +58,6 @@ public class FXMLDocumentController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
     }    
     
 }

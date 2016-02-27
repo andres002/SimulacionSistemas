@@ -11,10 +11,13 @@
         <Button fx:id="button" layoutX="120.0" layoutY="173.0" onAction="#IniciarSimulador" text="Iniciar Simulador" />
       <Button fx:id="button1" layoutX="521.0" layoutY="173.0" onAction="#TerminarSimulador" text="Terminar Simulador" />
       <TextArea editable="false" layoutX="103.0" prefHeight="210.0" prefWidth="539.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="246.0" />
-      <RadioButton layoutX="86.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="FCFS" />
-      <RadioButton layoutX="491.0" layoutY="57.0" mnemonicParsing="false" text="Round Robin" />
-      <RadioButton layoutX="244.0" layoutY="58.0" mnemonicParsing="false" text="SJF" />
-      <RadioButton layoutX="373.0" layoutY="57.0" mnemonicParsing="false" text="Prioridad" />
-      <RadioButton layoutX="307.0" layoutY="120.0" mnemonicParsing="false" text="Colas multinivel" />
+      <RadioButton fx:id="rbFCFS" layoutX="86.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="FCFS">
+         <toggleGroup>
+            <ToggleGroup fx:id="algoritmos" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="rbRR" layoutX="491.0" layoutY="57.0" mnemonicParsing="false" text="Round Robin" toggleGroup="$algoritmos" />
+      <RadioButton fx:id="rbSJF" layoutX="244.0" layoutY="58.0" mnemonicParsing="false" text="SJF" toggleGroup="$algoritmos" />
+      <RadioButton fx:id="rbPrioridad" layoutX="373.0" layoutY="57.0" mnemonicParsing="false" text="Prioridad" toggleGroup="$algoritmos" />
+      <RadioButton fx:id="rbCM" layoutX="307.0" layoutY="120.0" mnemonicParsing="false" text="Colas multinivel" toggleGroup="$algoritmos" />
     </children>
 </AnchorPane>
