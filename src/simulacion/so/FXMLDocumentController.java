@@ -23,12 +23,13 @@ public class FXMLDocumentController implements Initializable {
     public static ArrayList<Proceso> colaProcesos = new ArrayList<Proceso>();
     
     @FXML
-    private Label label;
+    private void IniciarSimulador(ActionEvent event) {
+
+    }
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private void TerminarSimulador(ActionEvent event) {
+
     }
     
     @Override
