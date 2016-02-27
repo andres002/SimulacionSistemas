@@ -9,53 +9,60 @@ import Procesos.Core;
 import static Procesos.Core.bandera;
 import Procesos.Proceso;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
 
 /**
  *
  * @author ERIDE21
  */
-public class ColasMultiNivel implements Runnable{
-    Thread T1;
-        
+public class ColasMultiNivel implements Runnable {
+
+    Thread T5;
+
     public void algoritmo() {
         Core c = new Core();
 
         if (!colaProcesos.isEmpty()) {
-            while (!bandera) {
-                System.out.println("haz nada");
-            }
             Proceso aux;
             aux = colaProcesos.get(0);
-            Integer temp = aux.tipo;
+            int temp = aux.tipo;
             for (int i = 1; i < colaProcesos.size(); i++) {
                 if (colaProcesos.get(i).tipo < temp) {
                     aux = colaProcesos.get(i);
                     temp = aux.tipo;
                 }
             }
+            while (!bandera) {
+                System.out.println("haz nada");
+            }
             c.procesar(aux, aux.tipo);
             colaProcesos.remove(aux);
 
-
         }
     }
-    
-     
-    public void activaHilo(){
-        T1 = new Thread (new ColasMultiNivel());
-        T1.setName("Edgardo");
-        T1.start();
+
+    public void activaHilo() {
+        T5 = new Thread(new ColasMultiNivel());
+        T5.setName("Nicky Minaj");
+        T5.start();
     }
-    public void asesinaHilo(){
-        T1.stop();
+
+    public void asesinaHilo() {
+        T5.stop();
     }
 
     @Override
     public void run() {
-        while (true) {            
-            algoritmo();
+        while (true) {
+            try {
+                algoritmo();
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
+
     }
 }

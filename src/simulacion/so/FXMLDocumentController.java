@@ -5,8 +5,10 @@
  */
 package simulacion.so;
 
+import Algoritmos.ColasMultiNivel;
 import Algoritmos.FCFS;
 import Algoritmos.Prioridad;
+import Algoritmos.RoundRobin;
 import Algoritmos.SJF;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,6 +32,8 @@ public class FXMLDocumentController implements Initializable{
     FCFS f = new FCFS();
     SJF s = new SJF();
     Prioridad priori = new Prioridad();
+    RoundRobin rr = new RoundRobin();
+    ColasMultiNivel cm = new ColasMultiNivel();
     public static String quantum;
     @FXML
     RadioButton rbFCFS,rbSJF,rbPrioridad,rbRR,rbCM;
@@ -49,10 +53,11 @@ public class FXMLDocumentController implements Initializable{
             priori.activaHilo();
         }
         if (rbRR.isSelected()) {
-            quantum = txtQuantum.getText();
+            this.quantum = txtQuantum.getText();
+            rr.activaHilo();
         }
         if (rbCM.isSelected()) {
-            
+            cm.activaHilo();
         }
         //System.out.println("algo---" + colaProcesos.get(0).nombre);
         
@@ -71,10 +76,10 @@ public class FXMLDocumentController implements Initializable{
             priori.asesinaHilo();
         }
         if (rbRR.isSelected()) {
-            
+            rr.asesinaHilo();
         }
         if (rbCM.isSelected()) {
-            
+             cm.asesinaHilo();
         }
 
     }

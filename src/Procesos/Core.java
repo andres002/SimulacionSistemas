@@ -16,8 +16,9 @@ public class Core {
     public static boolean bandera = true;
     public void procesar(Proceso p, Integer ticks) {
         bandera = false;
+        System.out.println("Nombre: " + p.nombre + " Ticks: " + ticks + "Ticks Reales: " + p.ticks+ " Tipo: " + p.tipo);
         p.ticks = p.ticks - ticks;
-        System.out.println("Nombre: " + p.nombre + " Ticks: " + ticks + " Tipo: " + p.tipo);
+        
         bandera = true;
     }
 }
