@@ -10,15 +10,22 @@ package Procesos;
  * @author Andres
  */
 public class Proceso {
-    /* PRIORIDADES
+    /* Tipos de proceso
     De sistema ------ 0
     Interactivos----- 1
     edicion---------- 2
     proceso por lotes 3
     */
-    public Integer tiempo = 0;
+    public Integer ticks = 0;
     public int prioridad = 0;
     public int tipo = 0; 
     public String nombre = "";
+    
+    public Proceso(Integer ticks,int tipo,int prioridad, String nombre){
+        this.ticks = ticks;
+        this.prioridad = prioridad;
+        this.tipo = tipo;
+        this.nombre = nombre;
+    }
     
 }
