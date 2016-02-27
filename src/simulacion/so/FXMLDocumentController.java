@@ -11,12 +11,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import Procesos.*;
+import java.util.ArrayList;
 
 /**
  *
  * @author Andres
  */
 public class FXMLDocumentController implements Initializable {
+    
+    public static ArrayList<Proceso> colaProcesos = new ArrayList<Proceso>();
     
     @FXML
     private Label label;
@@ -29,7 +33,8 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        GeneradorProcesos g = new GeneradorProcesos();
+                g.creaProcesos();
     }    
     
 }
