@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import Procesos.*;
 import java.util.ArrayList;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -25,8 +26,11 @@ public class FXMLDocumentController implements Initializable{
     public static ArrayList<Proceso> colaProcesos = new ArrayList<Proceso>();
     GeneradorProcesos g = new GeneradorProcesos();
     FCFS f = new FCFS();
+    public static String quantum;
     @FXML
     RadioButton rbFCFS,rbSJF,rbPrioridad,rbRR,rbCM;
+    @FXML
+    TextField txtQuantum;
     
     @FXML
     private void IniciarSimulador(ActionEvent event) {
@@ -41,7 +45,7 @@ public class FXMLDocumentController implements Initializable{
             
         }
         if (rbRR.isSelected()) {
-            
+            quantum = txtQuantum.getText();
         }
         if (rbCM.isSelected()) {
             
