@@ -18,7 +18,7 @@ public class GeneradorProcesos implements Runnable{
     
     final double probabilidad =  0.9502;
     int cont = 0;
-     Thread T1;
+     Thread T0;
    
    
     
@@ -61,21 +61,21 @@ public class GeneradorProcesos implements Runnable{
     public void run() {
         while(true){
             creaProcesos();
-            /*try {
-                Thread.sleep(500);
+            try {
+                Thread.sleep(300);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GeneradorProcesos.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
         }
     }
     
     public void activaHilo(){
-        T1 = new Thread (new GeneradorProcesos());
-        T1.setName("Ernesto");
-        T1.start();
+        T0 = new Thread (new GeneradorProcesos());
+        T0.setName("Ernesto");
+        T0.start();
     }
     public void asesinaHilo(){
-        T1.stop();
+        T0.stop();
     }
     
 }
