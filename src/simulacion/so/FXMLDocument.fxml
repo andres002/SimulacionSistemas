@@ -6,9 +6,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulacion.so.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="508.0" prefWidth="701.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="simulacion.so.FXMLDocumentController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+      <ScrollPane layoutX="176.0" layoutY="26.0" prefHeight="457.0" prefWidth="365.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="176.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="26.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="362.0">
+               <children>
+                  <TextArea editable="false" layoutY="-1.0" prefHeight="457.0" prefWidth="365.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+        <Button fx:id="button" layoutX="35.0" layoutY="230.0" onAction="#IniciarSimulador" text="Iniciar Simulador" />
+      <Button fx:id="button1" layoutX="560.0" layoutY="242.0" onAction="#TerminarSimulador" text="Terminar Simulador" />
     </children>
 </AnchorPane>
