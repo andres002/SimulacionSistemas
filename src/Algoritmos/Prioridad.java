@@ -24,6 +24,7 @@ public class Prioridad {
             for (int i = 1; i < colaProcesos.size(); i++) {
                 if (colaProcesos.get(i).prioridad < temp) {
                     aux = colaProcesos.get(i);
+                    temp = aux.ticks;
                 }
                 procesador.procesar(aux, aux.ticks);
             }
