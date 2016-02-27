@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="508.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulacion.so.FXMLDocumentController">
     <children>
-        <Button fx:id="button" layoutX="120.0" layoutY="173.0" onAction="#IniciarSimulador" text="Iniciar Simulador" />
+        <Button fx:id="btnIniciar" layoutX="120.0" layoutY="173.0" onAction="#IniciarSimulador" text="Iniciar Simulador" />
       <Button fx:id="button1" layoutX="521.0" layoutY="173.0" onAction="#TerminarSimulador" text="Terminar Simulador" />
       <TextArea editable="false" layoutX="103.0" prefHeight="210.0" prefWidth="539.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="246.0" />
       <RadioButton fx:id="rbFCFS" layoutX="86.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="FCFS">
