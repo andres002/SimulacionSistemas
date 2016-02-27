@@ -6,6 +6,8 @@
 package Procesos;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
 
 /**
@@ -16,6 +18,7 @@ public class GeneradorProcesos implements Runnable{
     
     final double probabilidad =  0.9502;
     int cont = 0;
+     Thread T1;
    
    
     
@@ -47,12 +50,8 @@ public class GeneradorProcesos implements Runnable{
                     posiblePrioriodad = rnd.nextInt(2)+1;
                     colaProcesos.add(new Proceso(posibleTick,3,posiblePrioriodad,"P" + cont));
                 }
-                
-                
             }
-                
-           
-           
+            System.out.println("cont " + cont);
     }
     
     
@@ -60,7 +59,22 @@ public class GeneradorProcesos implements Runnable{
 
     @Override
     public void run() {
-        
+        while(true){
+            creaProcesos();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GeneradorProcesos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void activaHilo(){
+        T1 = new Thread (new GeneradorProcesos());
+        T1.start();
+    }
+    public void asesinaHilo(){
+        T1.stop();
     }
     
 }

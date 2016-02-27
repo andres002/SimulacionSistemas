@@ -18,24 +18,24 @@ import java.util.ArrayList;
  *
  * @author Andres
  */
-public class FXMLDocumentController implements Initializable {
+public class FXMLDocumentController implements Initializable{
     
     public static ArrayList<Proceso> colaProcesos = new ArrayList<Proceso>();
+    GeneradorProcesos g = new GeneradorProcesos();
     
     @FXML
     private void IniciarSimulador(ActionEvent event) {
-
+        g.activaHilo();
     }
     
     @FXML
     private void TerminarSimulador(ActionEvent event) {
-
+        g.asesinaHilo();
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        GeneradorProcesos g = new GeneradorProcesos();
-                g.creaProcesos();
+        
     }    
     
 }
