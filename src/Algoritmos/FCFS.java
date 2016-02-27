@@ -8,6 +8,8 @@ import static simulacion.so.FXMLDocumentController.colaProcesos;
 import Procesos.Core;
 import static Procesos.Core.bandera;
 import Procesos.Proceso;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,15 +20,16 @@ public class FCFS  implements Runnable{
      
     public void algoritmo(){
         Core c = new Core();
-        
+        //System.out.println(!colaProcesos.isEmpty());
         if(!colaProcesos.isEmpty()){
             while(!bandera){
                 System.out.println("haz nada");
             }
-            Proceso aux = colaProcesos.get(0);
-            System.out.println("nombre: " + aux.nombre);
+            //Proceso aux = colaProcesos.get(0);
+            //System.out.println("nombre: " + aux.nombre);
+            c.procesar(colaProcesos.get(0),colaProcesos.get(0).ticks);
             colaProcesos.remove(0);
-            c.procesar(aux,aux.ticks);
+            
         }
     }
     
@@ -37,13 +40,22 @@ public class FCFS  implements Runnable{
         T1.start();
     }
     public void asesinaHilo(){
-        T1.stop();
+        if(T1.isAlive()) T1.stop();
     }
 
     @Override
     public void run() {
         while (true) {            
-            algoritmo();
+            try {
+                algoritmo();
+                
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FCFS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+                
+            
         }
         
     }
