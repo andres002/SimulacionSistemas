@@ -5,18 +5,46 @@
  */
 package Algoritmos;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
-import 
+import Procesos.Core;
+import static Procesos.Core.bandera;
+import Procesos.Proceso;
 
 /**
  *
  * @author Andres
  */
-public class FCFS {
+public class FCFS  implements Runnable{
+    Thread T1;
      
     public void algoritmo(){
+        Core c = new Core();
         
-        if(!colaProcesos.isEmpty()&& ){
-            
+        if(!colaProcesos.isEmpty()){
+            while(!bandera){
+                System.out.println("haz nada");
+            }
+            Proceso aux = colaProcesos.get(0);
+            System.out.println("nombre: " + aux.nombre);
+            colaProcesos.remove(0);
+            c.procesar(aux,aux.ticks);
         }
+    }
+    
+     
+    public void activaHilo(){
+        T1 = new Thread (new FCFS());
+        T1.setName("Edgardo");
+        T1.start();
+    }
+    public void asesinaHilo(){
+        T1.stop();
+    }
+
+    @Override
+    public void run() {
+        while (true) {            
+            algoritmo();
+        }
+        
     }
 }

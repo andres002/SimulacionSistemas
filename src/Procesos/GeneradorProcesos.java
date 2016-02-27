@@ -51,7 +51,7 @@ public class GeneradorProcesos implements Runnable{
                     colaProcesos.add(new Proceso(posibleTick,3,posiblePrioriodad,"P" + cont));
                 }
             }
-            System.out.println("cont " + cont);
+           // System.out.println("cont " + cont);
     }
     
     
@@ -61,16 +61,17 @@ public class GeneradorProcesos implements Runnable{
     public void run() {
         while(true){
             creaProcesos();
-            try {
+            /*try {
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GeneradorProcesos.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
         }
     }
     
     public void activaHilo(){
         T1 = new Thread (new GeneradorProcesos());
+        T1.setName("Ernesto");
         T1.start();
     }
     public void asesinaHilo(){

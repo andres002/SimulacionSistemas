@@ -5,6 +5,7 @@
  */
 package simulacion.so;
 
+import Algoritmos.FCFS;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,15 +23,21 @@ public class FXMLDocumentController implements Initializable{
     
     public static ArrayList<Proceso> colaProcesos = new ArrayList<Proceso>();
     GeneradorProcesos g = new GeneradorProcesos();
+    FCFS f = new FCFS();
+    
     
     @FXML
     private void IniciarSimulador(ActionEvent event) {
         g.activaHilo();
+        f.activaHilo();
+        //System.out.println("algo---" + colaProcesos.get(0).nombre);
+        
     }
     
     @FXML
     private void TerminarSimulador(ActionEvent event) {
         g.asesinaHilo();
+        f.asesinaHilo();
     }
     
     @Override

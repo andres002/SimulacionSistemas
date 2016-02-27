@@ -13,8 +13,10 @@ import java.util.logging.Logger;
  * @author Andres
  */
 public class Core {    
-
+    public static boolean bandera = true;
     public void procesar(Proceso p, int ticks) {
+        bandera = false;
         p.ticks = p.ticks - ticks;
+        bandera = true;
     }
 }
