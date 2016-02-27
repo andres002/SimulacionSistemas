@@ -6,18 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="508.0" prefWidth="701.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="simulacion.so.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="508.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulacion.so.FXMLDocumentController">
     <children>
-      <ScrollPane layoutX="176.0" layoutY="26.0" prefHeight="457.0" prefWidth="365.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="176.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="26.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="362.0">
-               <children>
-                  <TextArea editable="false" layoutY="-1.0" prefHeight="457.0" prefWidth="365.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
-        <Button fx:id="button" layoutX="35.0" layoutY="230.0" onAction="#IniciarSimulador" text="Iniciar Simulador" />
-      <Button fx:id="button1" layoutX="560.0" layoutY="242.0" onAction="#TerminarSimulador" text="Terminar Simulador" />
+        <Button fx:id="button" layoutX="120.0" layoutY="173.0" onAction="#IniciarSimulador" text="Iniciar Simulador" />
+      <Button fx:id="button1" layoutX="521.0" layoutY="173.0" onAction="#TerminarSimulador" text="Terminar Simulador" />
+      <TextArea editable="false" layoutX="103.0" prefHeight="210.0" prefWidth="539.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="246.0" />
+      <RadioButton layoutX="86.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="FCFS" />
+      <RadioButton layoutX="491.0" layoutY="57.0" mnemonicParsing="false" text="Round Robin" />
+      <RadioButton layoutX="244.0" layoutY="58.0" mnemonicParsing="false" text="SJF" />
+      <RadioButton layoutX="373.0" layoutY="57.0" mnemonicParsing="false" text="Prioridad" />
+      <RadioButton layoutX="307.0" layoutY="120.0" mnemonicParsing="false" text="Colas multinivel" />
     </children>
 </AnchorPane>
