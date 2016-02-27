@@ -6,6 +6,7 @@
 package simulacion.so;
 
 import Algoritmos.FCFS;
+import Algoritmos.Prioridad;
 import Algoritmos.SJF;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +29,7 @@ public class FXMLDocumentController implements Initializable{
     GeneradorProcesos g = new GeneradorProcesos();
     FCFS f = new FCFS();
     SJF s = new SJF();
+    Prioridad priori = new Prioridad();
     public static String quantum;
     @FXML
     RadioButton rbFCFS,rbSJF,rbPrioridad,rbRR,rbCM;
@@ -44,7 +46,7 @@ public class FXMLDocumentController implements Initializable{
             s.activaHilo();
         }
         if (rbPrioridad.isSelected()) {
-            
+            priori.activaHilo();
         }
         if (rbRR.isSelected()) {
             quantum = txtQuantum.getText();
@@ -66,7 +68,7 @@ public class FXMLDocumentController implements Initializable{
             s.asesinaHilo();
         }
         if (rbPrioridad.isSelected()) {
-            
+            priori.asesinaHilo();
         }
         if (rbRR.isSelected()) {
             

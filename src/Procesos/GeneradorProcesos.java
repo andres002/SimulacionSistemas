@@ -62,7 +62,7 @@ public class GeneradorProcesos implements Runnable{
         while(true){
             creaProcesos();
             try {
-                Thread.sleep(300);
+                Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GeneradorProcesos.class.getName()).log(Level.SEVERE, null, ex);
             }

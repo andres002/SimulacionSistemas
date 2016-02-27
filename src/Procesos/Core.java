@@ -17,7 +17,7 @@ public class Core {
     public void procesar(Proceso p, Integer ticks) {
         bandera = false;
         p.ticks = p.ticks - ticks;
-        System.out.println("Nombre: " + p.nombre + " Ticks: " + ticks);
+        System.out.println("Nombre: " + p.nombre + " Ticks: " + ticks + " Tipo: " + p.tipo);
         bandera = true;
     }
 }
