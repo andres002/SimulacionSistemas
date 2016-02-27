@@ -119,25 +119,25 @@ public class FXMLDocumentController implements Initializable {
             rbSJF.setDisable(false);
             rbPrioridad.setDisable(false);
             rbRR.setDisable(false);
-            rbFCFS.setDisable(false);
+            rbCM.setDisable(false);
         }
         if (rbSJF.isSelected()) {
             s.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
-            rbSJF.setDisable(false);
             rbPrioridad.setDisable(false);
             rbRR.setDisable(false);
             rbFCFS.setDisable(false);
+            rbCM.setDisable(false);
         }
         if (rbPrioridad.isSelected()) {
             priori.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
             rbSJF.setDisable(false);
-            rbPrioridad.setDisable(false);
             rbRR.setDisable(false);
             rbFCFS.setDisable(false);
+            rbCM.setDisable(false);
         }
         if (rbRR.isSelected()) {
             rr.asesinaHilo();
@@ -145,8 +145,8 @@ public class FXMLDocumentController implements Initializable {
             txtQuantum.setDisable(false);
             rbSJF.setDisable(false);
             rbPrioridad.setDisable(false);
-            rbRR.setDisable(false);
             rbFCFS.setDisable(false);
+            rbCM.setDisable(false);
         }
         if (rbCM.isSelected()) {
             cm.asesinaHilo();
@@ -156,6 +156,7 @@ public class FXMLDocumentController implements Initializable {
             rbPrioridad.setDisable(false);
             rbRR.setDisable(false);
             rbFCFS.setDisable(false);
+            rbCM.setDisable(false);
         }
 
     }
@@ -163,6 +164,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtQuantum.setText(null);
+        rbFCFS.setSelected(true);
     }
 
 }
