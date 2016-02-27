@@ -10,7 +10,15 @@ package Procesos;
  * @author Andres
  */
 public class Proceso {
-    public int tiempo = 0;
+    /* PRIORIDADES
+    De sistema ------ 0
+    Interactivos----- 1
+    edicion---------- 2
+    proceso por lotes 3
+    */
+    public Integer tiempo = 0;
     public int prioridad = 0;
+    public int tipo = 0; 
+    public String nombre = "";
     
 }
