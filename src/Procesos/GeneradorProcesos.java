@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
 import static simulacion.so.FXMLDocumentController.parar;
+import static Procesos.Core.bandera;
 
 /**
  *
@@ -34,22 +35,43 @@ public class GeneradorProcesos implements Runnable {
                 if (posibleTipo <= 0.25) {    // Procesos de Sistema
 
                     posiblePrioriodad = rnd.nextInt(4) + 1;
+                    while (!bandera) {
+                        System.out.println("haz nada procesos");
+                    }
+                    bandera = false;
                     colaProcesos.add(new Proceso(posibleTick, 0, posiblePrioriodad, "P" + cont, cont));
+                    bandera = true;
 
+                    
                 } else if (posibleTipo <= 0.50) { //Procesos interactivos
 
                     posiblePrioriodad = rnd.nextInt(2) + 1;
+                    while (!bandera) {
+                        System.out.println("haz nada procesos");
+                    }
+                    bandera = false;
                     colaProcesos.add(new Proceso(posibleTick, 1, posiblePrioriodad, "P" + cont, cont));
+                    bandera = true;
 
                 } else if (posibleTipo <= 0.75) { // Procesos de edicion
 
                     posiblePrioriodad = rnd.nextInt(2) + 1;
+                    while (!bandera) {
+                        System.out.println("haz nada procesos");
+                    }
+                    bandera = false;
                     colaProcesos.add(new Proceso(posibleTick, 2, posiblePrioriodad, "P" + cont, cont));
+                    bandera = true;
 
                 } else if (posibleTipo <= 1) { //Proceso por lotes
 
                     posiblePrioriodad = rnd.nextInt(2) + 1;
+                    while (!bandera) {
+                        System.out.println("haz nada procesos");
+                    }
+                    bandera = false;
                     colaProcesos.add(new Proceso(posibleTick, 3, posiblePrioriodad, "P" + cont, cont));
+                    bandera = true;
 
                 }
             }
