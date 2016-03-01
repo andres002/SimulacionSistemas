@@ -12,6 +12,10 @@ import static Procesos.Core.bandera;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static Procesos.GeneradorProcesos.cont;
+import static simulacion.so.FXMLDocumentController.numProcesos;
+import static simulacion.so.FXMLDocumentController.fx;
+import static simulacion.so.FXMLDocumentController.Te;
+import static simulacion.so.FXMLDocumentController.Resultados;
 
 /**
  *
@@ -57,6 +61,12 @@ public class SJF implements Runnable {
                             temp = aux.ticks.intValue();
                         }
                     }
+                    int te = cont-aux.llegada;
+                    Te = Te + te;
+                    numProcesos++;
+                    Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
+                            + "llegada: " + aux.llegada;
+                    System.out.println("\n" + Resultados);
                      Thread.sleep(1000*aux.ticks);
                     procesador.procesar(aux, aux.ticks);
                     colaProcesos.remove(aux);

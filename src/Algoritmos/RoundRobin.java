@@ -13,6 +13,10 @@ import java.util.logging.Logger;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
 import static simulacion.so.FXMLDocumentController.quantum;
 import static Procesos.GeneradorProcesos.cont;
+import static simulacion.so.FXMLDocumentController.numProcesos;
+import static simulacion.so.FXMLDocumentController.fx;
+import static simulacion.so.FXMLDocumentController.Te;
+import static simulacion.so.FXMLDocumentController.Resultados;
 
 /**
  *
@@ -23,10 +27,7 @@ public class RoundRobin implements Runnable {
     Thread T4;
     Integer q;
 
-    public void algoritmo() {
-        
-       
-    }
+
 
     public void activaHilo() {
         T4 = new Thread(new RoundRobin());
