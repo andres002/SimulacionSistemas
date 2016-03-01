@@ -14,6 +14,7 @@ import static simulacion.so.FXMLDocumentController.colaProcesos;
 import static Procesos.GeneradorProcesos.cont;
 import static simulacion.so.FXMLDocumentController.numProcesos;
 import static simulacion.so.FXMLDocumentController.fx;
+import static simulacion.so.FXMLDocumentController.parar;
 import static simulacion.so.FXMLDocumentController.Te;
 import static simulacion.so.FXMLDocumentController.Resultados;
 
@@ -36,6 +37,9 @@ public class Prioridad implements Runnable {
 
     public void asesinaHilo() {
         T3.stop();
+    }
+    public boolean vive(){
+        return T3.isAlive();
     }
 
     @Override
@@ -69,7 +73,12 @@ public class Prioridad implements Runnable {
                 procesador.procesar(aux, aux.ticks);
                 colaProcesos.remove(aux);
 
+            }else{
+                if(parar){
+                    T3.stop();
+                }
             }
+            
 
             
 

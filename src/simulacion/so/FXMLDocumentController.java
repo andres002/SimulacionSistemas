@@ -34,8 +34,9 @@ public class FXMLDocumentController implements Initializable {
     public static ArrayList<Proceso> colaProcesos = new ArrayList<Proceso>();
     public static int numProcesos;
     public static FXMLDocumentController fx = new FXMLDocumentController();
-    public static int Te = 0;
+    public static double Te = 0;
     public static String Resultados = "";
+    public static boolean parar = false, pararproceso = false; 
     GeneradorProcesos g = new GeneradorProcesos();
     FCFS f = new FCFS();
     SJF s = new SJF();
@@ -56,6 +57,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void IniciarSimulador(ActionEvent event) {
         numProcesos  = 0;
+        Resultados = "";
+        parar = false;
+        pararproceso = false; 
         btnIniciar.setDisable(true);
         if (rbFCFS.isSelected()) {
             f.activaHilo();
@@ -129,9 +133,15 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void TerminarSimulador(ActionEvent event) {
-        g.asesinaHilo();
+        //g.asesinaHilo();
+        parar = true;
         
         if (rbFCFS.isSelected()) {
+            //f.asesinaHilo();
+            while(!pararproceso || !parar ){
+                
+            }
+            g.asesinaHilo();
             f.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
@@ -141,6 +151,11 @@ public class FXMLDocumentController implements Initializable {
             rbCM.setDisable(false);
         }
         if (rbSJF.isSelected()) {
+            //s.asesinaHilo();
+            while(!pararproceso || !parar ){
+                
+            }
+            g.asesinaHilo();
             s.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);

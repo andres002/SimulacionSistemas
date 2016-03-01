@@ -16,6 +16,8 @@ import static simulacion.so.FXMLDocumentController.numProcesos;
 import static simulacion.so.FXMLDocumentController.fx;
 import static simulacion.so.FXMLDocumentController.Te;
 import static simulacion.so.FXMLDocumentController.Resultados;
+import static simulacion.so.FXMLDocumentController.parar;
+import static simulacion.so.FXMLDocumentController.pararproceso;
 
 /**
  *
@@ -39,7 +41,10 @@ public class SJF implements Runnable {
 
     public void asesinaHilo() {
             T2.stop();
-        
+    }
+    
+    public boolean vive(){
+        return T2.isAlive();
     }
 
     @Override
@@ -61,7 +66,7 @@ public class SJF implements Runnable {
                             temp = aux.ticks.intValue();
                         }
                     }
-                    int te = cont-aux.llegada;
+                    double te = cont-aux.llegada;
                     Te = Te + te;
                     numProcesos++;
                     Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
@@ -70,7 +75,11 @@ public class SJF implements Runnable {
                      Thread.sleep(1000*aux.ticks);
                     procesador.procesar(aux, aux.ticks);
                     colaProcesos.remove(aux);
+                }else{
+                if(parar){
+                    pararproceso = true;
                 }
+            }
                
             } catch (InterruptedException ex) {
                 Logger.getLogger(SJF.class.getName()).log(Level.SEVERE, null, ex);
