@@ -51,6 +51,13 @@ public class RoundRobin implements Runnable {
                         System.out.println("haz nada");
                     }
                     if (aux.ticks.intValue() - q >= 0) {
+                         int te = cont - aux.llegada;
+                        Te = Te + te;
+                        numProcesos++;
+                        Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
+                                + "llegada: " + aux.llegada;
+                        System.out.println("\n" + Resultados);
+                        
                         Thread.sleep(1000 * q);
                         c.procesar(aux, q);
                     } else {
@@ -61,6 +68,7 @@ public class RoundRobin implements Runnable {
                     if (aux.ticks <= 0) {
                         colaProcesos.remove(aux);
                     } else {
+                        aux.llegada = cont;
                         colaProcesos.add(aux);
                         colaProcesos.remove(0);
                     }
