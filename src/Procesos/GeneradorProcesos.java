@@ -30,7 +30,7 @@ public class GeneradorProcesos implements Runnable{
             int posiblePrioriodad;
             cont++;
             if(posible < probabilidad){
-                if(posibleTipo <=0.25){    // Procesos de Sistema
+                if(posibleTipo <=0.10){    // Procesos de Sistema
                     
                     posiblePrioriodad = rnd.nextInt(4)+1;
                     colaProcesos.add(new Proceso(posibleTick,0,posiblePrioriodad,"P" + cont,cont));

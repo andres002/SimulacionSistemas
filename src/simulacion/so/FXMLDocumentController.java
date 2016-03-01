@@ -99,6 +99,7 @@ public class FXMLDocumentController implements Initializable {
                 btnIniciar.setDisable(true);
                 txtQuantum.setDisable(true);
                 this.quantum = txtQuantum.getText();
+                System.out.println("Valor de quantum: "+quantum);
                 g.activaHilo();
                 rr.activaHilo();
             }
@@ -112,6 +113,21 @@ public class FXMLDocumentController implements Initializable {
             rbFCFS.setDisable(true);
             g.activaHilo();
             cm.activaHilo();
+            
+            if (txtQuantum.getText() == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("ERROR");
+                alert.setContentText("Falta el Quantum");
+                alert.showAndWait();
+                btnIniciar.setDisable(false);
+            } else {
+                btnIniciar.setDisable(true);
+                txtQuantum.setDisable(true);
+                this.quantum = txtQuantum.getText();
+                System.out.println("Valor de quantum: "+quantum);
+                g.activaHilo();
+                rr.activaHilo();
+            }
         }
         //System.out.println("algo---" + colaProcesos.get(0).nombre);
 
