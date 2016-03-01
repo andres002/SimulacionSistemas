@@ -37,21 +37,25 @@ public class Prioridad implements Runnable {
     public void asesinaHilo() {
         T3.stop();
     }
-
+static int recorrido;
     @Override
     public void run() {
         while (true) {
 
             if (!colaProcesos.isEmpty()) {
-                Proceso aux;
+                Proceso aux,aux2;
+               // int i=1;
                 aux = colaProcesos.get(0);
                 int temp = aux.tipo;
-                for (int i = 1; i < colaProcesos.size(); i++) {
-                    if (colaProcesos.get(i).tipo < temp) {
-                        aux = colaProcesos.get(i);
-                        temp = aux.tipo;
+                int limite = colaProcesos.size();
+                
+                for ( recorrido = 1; recorrido < limite; recorrido++) {
+                    aux2 = colaProcesos.get(recorrido);
+                    if (aux2.tipo < aux.tipo) {
+                        aux = aux2;
+                        //temp = aux.tipo;
                     }
-                }
+               }
                 while (!bandera) {
                     System.out.println("haz nada");
                 }
@@ -59,7 +63,7 @@ public class Prioridad implements Runnable {
                     int te = cont - aux.llegada;
                     Te = Te + te;
                     numProcesos++;
-                    Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
+                    Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks + "Prioridad: "+aux.tipo
                             + "llegada: " + aux.llegada;
                     System.out.println("\n" + Resultados);
                     Thread.sleep(1000 * aux.ticks);
@@ -72,7 +76,7 @@ public class Prioridad implements Runnable {
             }
 
             
-
+            recorrido=1;
         }
 
     }
