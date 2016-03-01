@@ -15,6 +15,8 @@ import static simulacion.so.FXMLDocumentController.numProcesos;
 import static simulacion.so.FXMLDocumentController.fx;
 import static simulacion.so.FXMLDocumentController.Te;
 import static simulacion.so.FXMLDocumentController.Resultados;
+import static simulacion.so.FXMLDocumentController.parar;
+import static simulacion.so.FXMLDocumentController.pararproceso;
 
 
 /**
@@ -33,9 +35,9 @@ public class FCFS  implements Runnable{
         T1.start();
     }
     public void asesinaHilo(){
-        if(T1.isAlive()) T1.stop();
+        T1.stop();
     }
-
+    
     @Override
     public void run() {
         while (true) {
@@ -48,7 +50,7 @@ public class FCFS  implements Runnable{
                     }
                     //Proceso aux = colaProcesos.get(0);
                     //System.out.println("nombre: " + aux.nombre
-                    int te = cont-colaProcesos.get(0).llegada;
+                    double te = cont-colaProcesos.get(0).llegada;
                     Te = Te + te;
                     numProcesos++;
                     Resultados = colaProcesos.get(0).nombre + ": TE: " + te + " Ticks: " + colaProcesos.get(0).ticks
@@ -58,7 +60,11 @@ public class FCFS  implements Runnable{
                     //fx.setResultados();
                     c.procesar(colaProcesos.get(0), colaProcesos.get(0).ticks);
                     colaProcesos.remove(0);
+                }else{
+                if(parar){
+                    pararproceso = true;
                 }
+            }
 
                 
             } catch (InterruptedException ex) {
