@@ -5,6 +5,7 @@
  */
 package Algoritmos;
 
+import static Algoritmos.Prioridad.recorrido;
 import Procesos.Core;
 import static Procesos.Core.bandera;
 import Procesos.Proceso;
@@ -13,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
 import static Procesos.GeneradorProcesos.cont;
+import static simulacion.so.FXMLDocumentController.colaProcesos;
+import static simulacion.so.FXMLDocumentController.quantum;
 
 /**
  *
@@ -25,6 +28,7 @@ public class ColasMultiNivel implements Runnable {
     ArrayList<Proceso> tipo_1 = new ArrayList();
     ArrayList<Proceso> tipo_2 = new ArrayList();
     ArrayList<Proceso> tipo_3 = new ArrayList();
+    Integer q;
     
 
     public void algoritmo() {
@@ -56,26 +60,45 @@ public class ColasMultiNivel implements Runnable {
             }
             
             ///////////////////
-            
+            q = Integer.parseInt(quantum);
             if(!tipo_0.isEmpty()){
-                c.procesar(tipo_0.get(0), tipo_0.get(0).ticks);
-                tipo_0.remove(0);
-                return;
+                
+                if((tipo_0.get(0).ticks-q)>=0){
+                    //int aux = q-tipo_0.get(0).ticks;
+                    c.procesar(tipo_0.get(0), q);
+                }else{
+                    c.procesar(tipo_0.get(0), tipo_0.get(0).ticks);
+                    tipo_0.remove(0);
+                }
+                
+                //tipo_0.remove(0);
+                //return;
             }
             if(!tipo_1.isEmpty()){
-                 c.procesar(tipo_1.get(0), tipo_1.get(0).ticks);
-                tipo_1.remove(0);
-                return;
+                Proceso aux = tipo_1.get(0);
+                Proceso aux2;
+                int i=1;
+                int limite = tipo_1.size();
+                for ( i = 1; i < limite; i++) {
+                    aux2 = colaProcesos.get(i);
+                    if (aux2.tipo < aux.tipo) {
+                        aux = aux2;
+                        //temp = aux.tipo;
+                    }
+               }
+                 c.procesar(aux, aux.ticks);
+                tipo_1.remove(i);
+                //return;
             }
             if(!tipo_2.isEmpty()){
                  c.procesar(tipo_2.get(0), tipo_2.get(0).ticks);
                 tipo_2.remove(0);
-                return;
+                //return;
             }
             if(!tipo_3.isEmpty()){
                  c.procesar(tipo_3.get(0), tipo_3.get(0).ticks);
                 tipo_3.remove(0);
-                return;
+                //return;
             }
             ///////////////////
            /* Proceso aux;
@@ -107,6 +130,7 @@ public class ColasMultiNivel implements Runnable {
     @Override
     public void run() {
         while (true) {
+            int i=1;
             try {
                 Core c = new Core();
 
@@ -118,18 +142,21 @@ public class ColasMultiNivel implements Runnable {
                 if(tipo == 0){
                     tipo_0.add(colaProcesos.get(0));
                 }
-                if(tipo == 1){
+                else if(tipo == 1){
                     tipo_1.add(colaProcesos.get(0));
                 }
-                if(tipo == 2){
+                else if(tipo == 2){
                     tipo_2.add(colaProcesos.get(0));
                 }
-                if(tipo == 3){
+                else if(tipo == 3){
                     tipo_3.add(colaProcesos.get(0));
                 }
+                System.out.println("Proceso 0: "+colaProcesos.size());
                 colaProcesos.remove(0);
                 System.out.println("procesando..");
             }
+            
+            
             //////////////////
             
             while (!bandera) {
@@ -137,26 +164,54 @@ public class ColasMultiNivel implements Runnable {
             }
             
             ///////////////////
+              q = Integer.parseInt(quantum);
             
             if(!tipo_0.isEmpty()){
+                System.out.println("Numero de procesos de tipo 0: "+tipo_0.size());
                 Thread.sleep(1000*tipo_0.get(0).ticks);
-                c.procesar(tipo_0.get(0), tipo_0.get(0).ticks);
-                tipo_0.remove(0);
+               // System.out.println("ijhuyhuyh  "+ q);
+                if(tipo_0.get(0).ticks-q>=0){
+                    //int aux = q-tipo_0.get(0).ticks;
+                    c.procesar(tipo_0.get(0), q);
+                }else{
+                    c.procesar(tipo_0.get(0), tipo_0.get(0).ticks);
+                    tipo_0.remove(0);
+                }
+                //c.procesar(tipo_0.get(0), tipo_0.get(0).ticks);
+                //tipo_0.remove(0);
                 
             }
             else if(!tipo_1.isEmpty()){
+                System.out.println("Numero de procesos de tipo 1: "+tipo_1.size());
                 Thread.sleep(1000*tipo_1.get(0).ticks);
-                 c.procesar(tipo_1.get(0), tipo_1.get(0).ticks);
-                tipo_1.remove(0);
+                 Proceso aux = tipo_1.get(0);
+                Proceso aux2;
+                 i=1;
+                 int eliminar=0;
+                int limite = tipo_1.size();
+                for ( i = 1; i < limite; i++) {
+                    aux2 = colaProcesos.get(i);
+                    if (aux2.tipo < aux.tipo) {
+                        aux = aux2;
+                        eliminar = i;
+                        //temp = aux.tipo;
+                    }
+               }
+                 c.procesar(aux, aux.ticks);
+                tipo_1.remove(eliminar);
+                // c.procesar(tipo_1.get(0), tipo_1.get(0).ticks);
+                //tipo_1.remove(0);
                 //return;
             }
             else if(!tipo_2.isEmpty()){
+                System.out.println("Numero de procesos de tipo 2: "+tipo_2.size());
                 Thread.sleep(1000*tipo_2.get(0).ticks);
                  c.procesar(tipo_2.get(0), tipo_2.get(0).ticks);
                 tipo_2.remove(0);
                 //return;
             }
             else if(!tipo_3.isEmpty()){
+                System.out.println("Numero de procesos de tipo 3: "+tipo_3.size());
                 Thread.sleep(1000 * tipo_3.get(0).ticks);
                  c.procesar(tipo_3.get(0), tipo_3.get(0).ticks);
                 tipo_3.remove(0);
@@ -181,6 +236,8 @@ public class ColasMultiNivel implements Runnable {
             } catch (InterruptedException ex) {
                 Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            i=1;
         }
 
     }
