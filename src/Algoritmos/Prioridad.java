@@ -11,6 +11,11 @@ import Procesos.Proceso;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
+import static Procesos.GeneradorProcesos.cont;
+import static simulacion.so.FXMLDocumentController.numProcesos;
+import static simulacion.so.FXMLDocumentController.fx;
+import static simulacion.so.FXMLDocumentController.Te;
+import static simulacion.so.FXMLDocumentController.Resultados;
 
 /**
  *
@@ -21,26 +26,7 @@ public class Prioridad implements Runnable {
     Core procesador = new Core();
     Thread T3;
 
-    public void algoritmo() {
-        if (!colaProcesos.isEmpty()) {
-            Proceso aux;
-            aux = colaProcesos.get(0);
-            int temp = aux.tipo;
-            for (int i = 1; i < colaProcesos.size(); i++) {
-                if (colaProcesos.get(i).tipo < temp) {
-                    aux = colaProcesos.get(i);
-                    temp = aux.tipo;
-                }
-            }
-            while (!bandera) {
-                System.out.println("haz nada");
-            }
-            procesador.procesar(aux, aux.ticks);
-            colaProcesos.remove(aux);
-
-        }
-
-    }
+    
 
     public void activaHilo() {
         T3 = new Thread(new Prioridad());
@@ -56,13 +42,36 @@ public class Prioridad implements Runnable {
     public void run() {
         while (true) {
 
-            algoritmo();
+            if (!colaProcesos.isEmpty()) {
+                Proceso aux;
+                aux = colaProcesos.get(0);
+                int temp = aux.tipo;
+                for (int i = 1; i < colaProcesos.size(); i++) {
+                    if (colaProcesos.get(i).tipo < temp) {
+                        aux = colaProcesos.get(i);
+                        temp = aux.tipo;
+                    }
+                }
+                while (!bandera) {
+                    System.out.println("haz nada");
+                }
+                try {
+                    int te = cont - aux.llegada;
+                    Te = Te + te;
+                    numProcesos++;
+                    Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
+                            + "llegada: " + aux.llegada;
+                    System.out.println("\n" + Resultados);
+                    Thread.sleep(1000 * aux.ticks);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Prioridad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                procesador.procesar(aux, aux.ticks);
+                colaProcesos.remove(aux);
 
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Prioridad.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            
 
         }
 

@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
 import static simulacion.so.FXMLDocumentController.quantum;
+import static Procesos.GeneradorProcesos.cont;
 
 /**
  *
@@ -24,26 +25,7 @@ public class RoundRobin implements Runnable {
 
     public void algoritmo() {
         
-        q = Integer.parseInt(quantum);
-        Core c = new Core();
-        if (!colaProcesos.isEmpty()) {
-            Proceso aux = colaProcesos.get(0);
-            while (!bandera) {
-                System.out.println("haz nada");
-            }
-            if(aux.ticks.intValue() - q >= 0){
-                c.procesar(aux, q);
-            }else{
-                c.procesar(aux, aux.ticks);
-            }
-           
-            if (aux.ticks <= 0) {
-                colaProcesos.remove(aux);
-            } else {
-                colaProcesos.add(aux);
-                colaProcesos.remove(0);
-            }
-        }
+       
     }
 
     public void activaHilo() {
@@ -60,8 +42,29 @@ public class RoundRobin implements Runnable {
     public void run() {
         while (true) {
             try {
-                algoritmo();
-                Thread.sleep(500);
+                q = Integer.parseInt(quantum);
+                Core c = new Core();
+                if (!colaProcesos.isEmpty()) {
+                    Proceso aux = colaProcesos.get(0);
+                    while (!bandera) {
+                        System.out.println("haz nada");
+                    }
+                    if (aux.ticks.intValue() - q >= 0) {
+                        Thread.sleep(1000 * q);
+                        c.procesar(aux, q);
+                    } else {
+                        c.procesar(aux, aux.ticks);
+                        Thread.sleep(1000 * aux.ticks);
+                    }
+
+                    if (aux.ticks <= 0) {
+                        colaProcesos.remove(aux);
+                    } else {
+                        colaProcesos.add(aux);
+                        colaProcesos.remove(0);
+                    }
+                }
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(RoundRobin.class.getName()).log(Level.SEVERE, null, ex);
             }

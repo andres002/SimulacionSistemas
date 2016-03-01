@@ -20,12 +20,14 @@ public class Proceso {
     public int prioridad = 0;
     public int tipo = 0; 
     public String nombre = "";
+    public int llegada = 0;
     
-    public Proceso(Integer ticks,int tipo,int prioridad, String nombre){
+    public Proceso(Integer ticks,int tipo,int prioridad, String nombre, int llegada){
         this.ticks = ticks;
         this.prioridad = prioridad;
         this.tipo = tipo;
         this.nombre = nombre;
+        this.llegada = llegada;
     }
     
 }

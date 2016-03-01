@@ -11,6 +11,7 @@ import static simulacion.so.FXMLDocumentController.colaProcesos;
 import static Procesos.Core.bandera;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static Procesos.GeneradorProcesos.cont;
 
 /**
  *
@@ -22,23 +23,7 @@ public class SJF implements Runnable {
     Thread T2;
 
     public void algoritmo() {
-        if (!colaProcesos.isEmpty()) {
-            while (!bandera) {
-                System.out.println("haz nada");
-            }
-            Proceso aux;
-            aux = colaProcesos.get(0);
-            Integer temp = aux.ticks.intValue();
-            //int sizeNow = colaProcesos.size();
-            for (int i = 1; i < colaProcesos.size(); i++) {
-                if (colaProcesos.get(i).ticks.intValue() < temp) {
-                    aux = colaProcesos.get(i);
-                    temp = aux.ticks.intValue();
-                }
-            }
-            procesador.procesar(aux, aux.ticks);
-            colaProcesos.remove(aux);
-        }
+       
 
     }
 
@@ -56,10 +41,27 @@ public class SJF implements Runnable {
     @Override
     public void run() {
         while (true) {
-            
+
             try {
-                algoritmo();
-                Thread.sleep(500);
+                if (!colaProcesos.isEmpty()) {
+                    while (!bandera) {
+                        System.out.println("haz nada");
+                    }
+                    Proceso aux;
+                    aux = colaProcesos.get(0);
+                    Integer temp = aux.ticks.intValue();
+                    //int sizeNow = colaProcesos.size();
+                    for (int i = 1; i < colaProcesos.size(); i++) {
+                        if (colaProcesos.get(i).ticks.intValue() < temp) {
+                            aux = colaProcesos.get(i);
+                            temp = aux.ticks.intValue();
+                        }
+                    }
+                     Thread.sleep(1000*aux.ticks);
+                    procesador.procesar(aux, aux.ticks);
+                    colaProcesos.remove(aux);
+                }
+               
             } catch (InterruptedException ex) {
                 Logger.getLogger(SJF.class.getName()).log(Level.SEVERE, null, ex);
             }

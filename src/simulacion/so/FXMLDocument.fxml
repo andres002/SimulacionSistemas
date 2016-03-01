@@ -10,7 +10,7 @@
     <children>
         <Button fx:id="btnIniciar" layoutX="120.0" layoutY="173.0" onAction="#IniciarSimulador" text="Iniciar Simulador" />
       <Button fx:id="button1" layoutX="521.0" layoutY="173.0" onAction="#TerminarSimulador" text="Terminar Simulador" />
-      <TextArea editable="false" layoutX="103.0" prefHeight="210.0" prefWidth="539.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="246.0" />
+      <TextArea fx:id="resultados" editable="false" layoutX="87.0" prefHeight="228.0" prefWidth="555.0" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="246.0" />
       <RadioButton fx:id="rbFCFS" layoutX="86.0" layoutY="57.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="FCFS">
          <toggleGroup>
             <ToggleGroup fx:id="algoritmos" />

@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 
 /**
  *
@@ -30,6 +32,10 @@ import javafx.scene.control.TextField;
 public class FXMLDocumentController implements Initializable {
 
     public static ArrayList<Proceso> colaProcesos = new ArrayList<Proceso>();
+    public static int numProcesos;
+    public static FXMLDocumentController fx = new FXMLDocumentController();
+    public static int Te = 0;
+    public static String Resultados = "";
     GeneradorProcesos g = new GeneradorProcesos();
     FCFS f = new FCFS();
     SJF s = new SJF();
@@ -43,10 +49,13 @@ public class FXMLDocumentController implements Initializable {
     TextField txtQuantum;
     @FXML
     Button btnIniciar, btnTerminar;
+    
+    @FXML
+    TextArea resultados;
 
     @FXML
     private void IniciarSimulador(ActionEvent event) {
-
+        numProcesos  = 0;
         btnIniciar.setDisable(true);
         if (rbFCFS.isSelected()) {
             f.activaHilo();
@@ -107,6 +116,16 @@ public class FXMLDocumentController implements Initializable {
         //System.out.println("algo---" + colaProcesos.get(0).nombre);
 
     }
+    
+    @FXML
+    public void setResultados(){
+       resultados.setText(resultados.getText() + "\n" + Resultados);
+    }
+    
+    
+    
+    
+    
 
     @FXML
     private void TerminarSimulador(ActionEvent event) {
@@ -158,13 +177,15 @@ public class FXMLDocumentController implements Initializable {
             rbFCFS.setDisable(false);
             rbCM.setDisable(false);
         }
-
+        
+        resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtQuantum.setText(null);
         rbFCFS.setSelected(true);
+        resultados.setText("");
     }
 
 }

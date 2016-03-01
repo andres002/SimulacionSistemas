@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
+import static Procesos.GeneradorProcesos.cont;
 
 /**
  *
@@ -107,8 +108,76 @@ public class ColasMultiNivel implements Runnable {
     public void run() {
         while (true) {
             try {
-                algoritmo();
-                Thread.sleep(500);
+                Core c = new Core();
+
+        if (!colaProcesos.isEmpty()) {
+            
+            ////////////////////
+            while(!colaProcesos.isEmpty()){
+                int tipo = colaProcesos.get(0).tipo;
+                if(tipo == 0){
+                    tipo_0.add(colaProcesos.get(0));
+                }
+                if(tipo == 1){
+                    tipo_1.add(colaProcesos.get(0));
+                }
+                if(tipo == 2){
+                    tipo_2.add(colaProcesos.get(0));
+                }
+                if(tipo == 3){
+                    tipo_3.add(colaProcesos.get(0));
+                }
+                colaProcesos.remove(0);
+                System.out.println("procesando..");
+            }
+            //////////////////
+            
+            while (!bandera) {
+                System.out.println("haz nada");
+            }
+            
+            ///////////////////
+            
+            if(!tipo_0.isEmpty()){
+                Thread.sleep(1000*tipo_0.get(0).ticks);
+                c.procesar(tipo_0.get(0), tipo_0.get(0).ticks);
+                tipo_0.remove(0);
+                
+            }
+            else if(!tipo_1.isEmpty()){
+                Thread.sleep(1000*tipo_1.get(0).ticks);
+                 c.procesar(tipo_1.get(0), tipo_1.get(0).ticks);
+                tipo_1.remove(0);
+                //return;
+            }
+            else if(!tipo_2.isEmpty()){
+                Thread.sleep(1000*tipo_2.get(0).ticks);
+                 c.procesar(tipo_2.get(0), tipo_2.get(0).ticks);
+                tipo_2.remove(0);
+                //return;
+            }
+            else if(!tipo_3.isEmpty()){
+                Thread.sleep(1000 * tipo_3.get(0).ticks);
+                 c.procesar(tipo_3.get(0), tipo_3.get(0).ticks);
+                tipo_3.remove(0);
+               // return;
+            }
+            ///////////////////
+           /* Proceso aux;
+            aux = colaProcesos.get(0);
+            int temp = aux.tipo;
+            for (int i = 1; i < colaProcesos.size(); i++) {
+                if (colaProcesos.get(i).tipo < temp) {
+                    aux = colaProcesos.get(i);
+                    temp = aux.tipo;
+                }
+            }*/
+            
+           // c.procesar(aux, aux.tipo);
+           // colaProcesos.remove(aux);
+
+        }
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
             }
