@@ -52,6 +52,7 @@ public class FCFS  implements Runnable{
                     }
                     //Proceso aux = colaProcesos.get(0);
                     //System.out.println("nombre: " + aux.nombre
+                    System.out.println("aqui imprimimos el cooooooooont ---  " + cont);
                     double te = cont-colaProcesos.get(0).llegada;
                     double tr = te + colaProcesos.get(0).ticks;
                     double tp = (te + colaProcesos.get(0).ticks) / colaProcesos.get(0).ticks;
@@ -64,7 +65,9 @@ public class FCFS  implements Runnable{
                     Tr += te + colaProcesos.get(0).ticks;
                     Tp += (te + colaProcesos.get(0).ticks) / colaProcesos.get(0).ticks;
                     System.out.println("\n" + Resultados);
+                    System.out.println("aqui imprimimos el TIIIIIIIIICKS ---  " + colaProcesos.get(0).ticks);
                     Thread.sleep(1000 * colaProcesos.get(0).ticks);
+                    System.out.println("despues de dormir");
                     //fx.setResultados();
                     c.procesar(colaProcesos.get(0), colaProcesos.get(0).ticks);
                     colaProcesos.remove(0);

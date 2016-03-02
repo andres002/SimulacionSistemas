@@ -19,7 +19,7 @@ import static Procesos.Core.bandera;
 public class GeneradorProcesos implements Runnable {
 
     final double probabilidad = 0.9502;
-    static public int cont = 0;
+    static public int cont = -1;
 
     Thread T0;
 

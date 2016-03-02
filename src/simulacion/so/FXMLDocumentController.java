@@ -156,7 +156,7 @@ public class FXMLDocumentController implements Initializable {
         
         if (rbFCFS.isSelected()) {
             //f.asesinaHilo();
-            g.asesinaHilo();//mata al hilo de los procesos
+            
             System.out.println("Valor de parar procesos: "+pararproceso);
             while(!pararproceso){
                 System.out.print("");
@@ -167,6 +167,7 @@ public class FXMLDocumentController implements Initializable {
                     pararproceso=true;
                 }*/
             }
+            g.asesinaHilo();//mata al hilo de los procesos
             System.out.println("Imprimo tiempos");
             f.asesinaHilo();
             btnIniciar.setDisable(false);
