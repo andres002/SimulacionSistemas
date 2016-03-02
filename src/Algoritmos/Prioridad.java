@@ -17,6 +17,10 @@ import static simulacion.so.FXMLDocumentController.fx;
 import static simulacion.so.FXMLDocumentController.parar;
 import static simulacion.so.FXMLDocumentController.Te;
 import static simulacion.so.FXMLDocumentController.Resultados;
+import static simulacion.so.FXMLDocumentController.Tp;
+import static simulacion.so.FXMLDocumentController.Tr;
+import static simulacion.so.FXMLDocumentController.colaProcesos;
+import static simulacion.so.FXMLDocumentController.pararproceso;
 
 /**
  *
@@ -65,10 +69,16 @@ static int recorrido;
                 }
                 try {
                     int te = cont - aux.llegada;
+                    double tr = te + aux.ticks;
+                    double tp = (te + aux.ticks) / aux.ticks.doubleValue();
+                    System.out.println("Valor de tp "+ tp);
                     Te = Te + te;
                     numProcesos++;
                     Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks + "Prioridad: "+aux.tipo
-                            + "llegada: " + aux.llegada;
+                            + " Llegada: " + aux.llegada + " Tr: "+ tr + " Tp: "
+                            + tp;
+                    Tr += te + aux.ticks;
+                    Tp += (te + aux.ticks) / aux.ticks;                    
                     System.out.println("\n" + Resultados);
                     Thread.sleep(1000 * aux.ticks);
                 } catch (InterruptedException ex) {
@@ -79,7 +89,8 @@ static int recorrido;
 
             }else{
                 if(parar){
-                    T3.stop();
+                    //T3.stop();
+                    pararproceso = true;
                 }
             }
             

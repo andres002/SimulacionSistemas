@@ -16,6 +16,8 @@ import static simulacion.so.FXMLDocumentController.numProcesos;
 import static simulacion.so.FXMLDocumentController.fx;
 import static simulacion.so.FXMLDocumentController.Te;
 import static simulacion.so.FXMLDocumentController.Resultados;
+import static simulacion.so.FXMLDocumentController.Tp;
+import static simulacion.so.FXMLDocumentController.Tr;
 import static simulacion.so.FXMLDocumentController.parar;
 import static simulacion.so.FXMLDocumentController.pararproceso;
 
@@ -67,17 +69,24 @@ public class SJF implements Runnable {
                         }
                     }
                     double te = cont-aux.llegada;
+                    double tr = te + aux.ticks;
+                    double tp = (te + aux.ticks) / aux.ticks;
                     Te = Te + te;
                     numProcesos++;
                     Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
-                            + "llegada: " + aux.llegada;
+                            + " Llegada: " + aux.llegada+ " Tr: "+ tr + " Tp: "
+                            + tp;
+                    Tr += te + aux.ticks;
+                    Tp += (te + aux.ticks) / aux.ticks;
                     System.out.println("\n" + Resultados);
                      Thread.sleep(1000*aux.ticks);
                     procesador.procesar(aux, aux.ticks);
                     colaProcesos.remove(aux);
                 }else{
                 if(parar){
+                   System.out.println("Se terminaron los procesos");
                     pararproceso = true;
+                    return;
                 }
             }
                

@@ -15,6 +15,8 @@ import static simulacion.so.FXMLDocumentController.numProcesos;
 import static simulacion.so.FXMLDocumentController.fx;
 import static simulacion.so.FXMLDocumentController.Te;
 import static simulacion.so.FXMLDocumentController.Resultados;
+import static simulacion.so.FXMLDocumentController.Tp;
+import static simulacion.so.FXMLDocumentController.Tr;
 import static simulacion.so.FXMLDocumentController.parar;
 import static simulacion.so.FXMLDocumentController.pararproceso;
 
@@ -51,10 +53,16 @@ public class FCFS  implements Runnable{
                     //Proceso aux = colaProcesos.get(0);
                     //System.out.println("nombre: " + aux.nombre
                     double te = cont-colaProcesos.get(0).llegada;
+                    double tr = te + colaProcesos.get(0).ticks;
+                    double tp = (te + colaProcesos.get(0).ticks) / colaProcesos.get(0).ticks;
                     Te = Te + te;
                     numProcesos++;
+                    
                     Resultados = colaProcesos.get(0).nombre + ": TE: " + te + " Ticks: " + colaProcesos.get(0).ticks
-                            + "llegada: " + colaProcesos.get(0).llegada;
+                            + " Llegada: " + colaProcesos.get(0).llegada + " Tr: "+ tr + " Tp: "
+                            + tp;
+                    Tr += te + colaProcesos.get(0).ticks;
+                    Tp += (te + colaProcesos.get(0).ticks) / colaProcesos.get(0).ticks;
                     System.out.println("\n" + Resultados);
                     Thread.sleep(1000 * colaProcesos.get(0).ticks);
                     //fx.setResultados();
@@ -62,7 +70,9 @@ public class FCFS  implements Runnable{
                     colaProcesos.remove(0);
                 }else{
                 if(parar){
+                    System.out.println("Se terminaron los procesos");
                     pararproceso = true;
+                    return;
                 }
             }
 

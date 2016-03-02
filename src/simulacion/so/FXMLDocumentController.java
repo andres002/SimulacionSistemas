@@ -35,6 +35,8 @@ public class FXMLDocumentController implements Initializable {
     public static int numProcesos;
     public static FXMLDocumentController fx = new FXMLDocumentController();
     public static double Te = 0;
+    public static double Tr = 0;
+    public static double Tp = 0;
     public static String Resultados = "";
     public static boolean parar = false, pararproceso = false; 
     GeneradorProcesos g = new GeneradorProcesos();
@@ -154,10 +156,18 @@ public class FXMLDocumentController implements Initializable {
         
         if (rbFCFS.isSelected()) {
             //f.asesinaHilo();
-            while(!pararproceso || !parar ){
-                
+            g.asesinaHilo();//mata al hilo de los procesos
+            System.out.println("Valor de parar procesos: "+pararproceso);
+            while(!pararproceso){
+                System.out.print("");
+
+                //System.out.println("Me atore");
+                /*if (colaProcesos.size() == 0) {
+                    System.out.println("Entro en este if");
+                    pararproceso=true;
+                }*/
             }
-            g.asesinaHilo();
+            System.out.println("Imprimo tiempos");
             f.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
@@ -168,10 +178,10 @@ public class FXMLDocumentController implements Initializable {
         }
         if (rbSJF.isSelected()) {
             //s.asesinaHilo();
-            while(!pararproceso || !parar ){
-                
-            }
             g.asesinaHilo();
+            while(!pararproceso){
+                System.out.print("");
+            }
             s.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
@@ -181,6 +191,10 @@ public class FXMLDocumentController implements Initializable {
             rbCM.setDisable(false);
         }
         if (rbPrioridad.isSelected()) {
+           g.asesinaHilo();
+            while(!pararproceso){
+                System.out.print("");
+            }
             priori.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
@@ -209,7 +223,10 @@ public class FXMLDocumentController implements Initializable {
             rbCM.setDisable(false);
         }
         
-        resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos));
+        resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos) +"\n"+"\n\nTiempo de respuesta: "+(Tr/numProcesos)
+                +"\n"+"\n\nTiempo de penalizacion: "+(Tp/numProcesos));
+        
+        //System.out.println("\n\nTiempo de espera promedio: " + (Te/numProcesos));
     }
 
     @Override

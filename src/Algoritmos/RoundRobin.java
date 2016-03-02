@@ -65,7 +65,7 @@ public class RoundRobin implements Runnable {
                         Thread.sleep(1000 * aux.ticks);
                     }
 
-                    if (aux.ticks <= 0) {
+                    if (aux.ticks == 0) {
                         colaProcesos.remove(aux);
                     } else {
                         aux.llegada = cont;
