@@ -68,6 +68,7 @@ public class SJF implements Runnable {
                             temp = aux.ticks.intValue();
                         }
                     }
+                    System.out.println("cooooooooont " + cont);
                     double te = cont-aux.llegada;
                     double tr = te + aux.ticks;
                     double tp = (te + aux.ticks) / aux.ticks;

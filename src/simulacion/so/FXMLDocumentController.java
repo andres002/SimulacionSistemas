@@ -167,9 +167,10 @@ public class FXMLDocumentController implements Initializable {
                     pararproceso=true;
                 }*/
             }
-            g.asesinaHilo();//mata al hilo de los procesos
+           
             System.out.println("Imprimo tiempos");
             f.asesinaHilo();
+             g.asesinaHilo();//mata al hilo de los procesos
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
             rbSJF.setDisable(false);
@@ -179,11 +180,12 @@ public class FXMLDocumentController implements Initializable {
         }
         if (rbSJF.isSelected()) {
             //s.asesinaHilo();
-            g.asesinaHilo();
+           
             while(!pararproceso){
                 System.out.print("");
             }
             s.asesinaHilo();
+            g.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
             rbPrioridad.setDisable(false);
