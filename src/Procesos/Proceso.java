@@ -16,6 +16,7 @@ public class Proceso {
     edicion---------- 2
     proceso por lotes 3
     */
+    public int espera=0;
     public Integer ticks = 0;
     public int prioridad = 0;
     public int tipo = 0; 

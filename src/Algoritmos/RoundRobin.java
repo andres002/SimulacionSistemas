@@ -17,6 +17,8 @@ import static simulacion.so.FXMLDocumentController.numProcesos;
 import static simulacion.so.FXMLDocumentController.fx;
 import static simulacion.so.FXMLDocumentController.Te;
 import static simulacion.so.FXMLDocumentController.Resultados;
+import static simulacion.so.FXMLDocumentController.parar;
+import static simulacion.so.FXMLDocumentController.pararproceso;
 
 /**
  *
@@ -46,32 +48,58 @@ public class RoundRobin implements Runnable {
                 q = Integer.parseInt(quantum);
                 Core c = new Core();
                 if (!colaProcesos.isEmpty()) {
-                    Proceso aux = colaProcesos.get(0);
                     while (!bandera) {
                         System.out.println("haz nada");
                     }
-                    if (aux.ticks.intValue() - q >= 0) {
+                    bandera =false;
+                    Proceso aux = colaProcesos.get(0); 
+                    bandera = true;
+                    if ((aux.ticks - q) > 0) {
                          int te = cont - aux.llegada;
-                        Te = Te + te;
-                        numProcesos++;
+                        //Te = Te + te;
+                        //numProcesos++;
                         Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
                                 + "llegada: " + aux.llegada;
                         System.out.println("\n" + Resultados);
-                        
-                        Thread.sleep(1000 * q);
                         c.procesar(aux, q);
+                        aux.llegada = cont;
+                        aux.espera = aux.espera + te;
+                        Thread.sleep(1000 * q);
+                        //c.procesar(aux, q);
+                        while (!bandera) {
+                            System.out.println("haz nada");
+                        }
+                        bandera = false;
+                        colaProcesos.add(colaProcesos.get(0));
+                        colaProcesos.remove(0);
+                        
+                        bandera = true;
                     } else {
-                        c.procesar(aux, aux.ticks);
+                        System.out.println("entra al elseeeeeeeeeeeeee");
+                        int te = cont - aux.llegada;
+                        Te += (te + aux.espera); 
+                        
                         Thread.sleep(1000 * aux.ticks);
+                       c.procesar(aux, aux.ticks);
+                        Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
+                                + "llegada: " + aux.llegada;
+                        System.out.println("\n"+Resultados);
+                         numProcesos++;
+                        while (!bandera) {
+                            System.out.println("haz nada");
+                        }
+                         bandera = false;
+                        colaProcesos.remove(0);
+                         bandera = true;
+                        
                     }
 
-                    if (aux.ticks == 0) {
-                        colaProcesos.remove(aux);
-                    } else {
-                        aux.llegada = cont;
-                        colaProcesos.add(aux);
-                        colaProcesos.remove(0);
-                    }
+                }else{
+                   if(parar){
+                    System.out.println("Se terminaron los procesos");
+                    pararproceso = true;
+                    return;
+                }
                 }
                 
             } catch (InterruptedException ex) {

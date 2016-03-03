@@ -194,11 +194,12 @@ public class FXMLDocumentController implements Initializable {
             rbCM.setDisable(false);
         }
         if (rbPrioridad.isSelected()) {
-           g.asesinaHilo();
+           
             while(!pararproceso){
                 System.out.print("");
             }
             priori.asesinaHilo();
+            g.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
             rbSJF.setDisable(false);
@@ -207,7 +208,12 @@ public class FXMLDocumentController implements Initializable {
             rbCM.setDisable(false);
         }
         if (rbRR.isSelected()) {
+            while(!pararproceso){
+                System.out.print("");
+            }
+            System.out.println("Se terminaron los procesos");
             rr.asesinaHilo();
+             g.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
             rbSJF.setDisable(false);
