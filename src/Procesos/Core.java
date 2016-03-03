@@ -14,8 +14,10 @@ import java.util.logging.Logger;
  */
 public class Core {    
     public static boolean bandera = true;
+    public static int t_procesador=0;
     public void procesar(Proceso p, Integer ticks) {
         //System.out.println("Nombre: " + p.nombre + " Ticks: " + ticks + "Ticks Reales: " + p.ticks+ " Tipo: " + p.tipo);
+        t_procesador+=ticks;
         p.ticks = p.ticks - ticks;
         
     }

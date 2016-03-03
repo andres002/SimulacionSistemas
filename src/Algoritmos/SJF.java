@@ -77,7 +77,7 @@ public class SJF implements Runnable {
                     Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
                             + " Llegada: " + aux.llegada+ " Tr: "+ tr + " Tp: "
                             + tp;
-                    Tr += te + aux.ticks;
+                    Tr += tr + aux.ticks;
                     Tp += (te + aux.ticks) / aux.ticks;
                     System.out.println("\n" + Resultados);
                      Thread.sleep(1000*aux.ticks);

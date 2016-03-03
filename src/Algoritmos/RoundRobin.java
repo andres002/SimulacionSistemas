@@ -7,6 +7,7 @@ package Algoritmos;
 
 import Procesos.Core;
 import static Procesos.Core.bandera;
+import static Procesos.Core.t_procesador;
 import Procesos.Proceso;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,8 @@ import static simulacion.so.FXMLDocumentController.numProcesos;
 import static simulacion.so.FXMLDocumentController.fx;
 import static simulacion.so.FXMLDocumentController.Te;
 import static simulacion.so.FXMLDocumentController.Resultados;
+import static simulacion.so.FXMLDocumentController.Tp;
+import static simulacion.so.FXMLDocumentController.Tr;
 import static simulacion.so.FXMLDocumentController.parar;
 import static simulacion.so.FXMLDocumentController.pararproceso;
 
@@ -28,7 +31,7 @@ public class RoundRobin implements Runnable {
 
     Thread T4;
     Integer q;
-
+    public static int cont_ticks=0; 
 
 
     public void activaHilo() {
@@ -55,14 +58,17 @@ public class RoundRobin implements Runnable {
                     Proceso aux = colaProcesos.get(0); 
                     bandera = true;
                     if ((aux.ticks - q) > 0) {
-                         int te = cont - aux.llegada;
+                         int te = t_procesador - aux.llegada;
                         //Te = Te + te;
                         //numProcesos++;
+                        int tr = te + cont_ticks; 
                         Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
-                                + "llegada: " + aux.llegada;
+                                + " Llegada: " + aux.llegada;
                         System.out.println("\n" + Resultados);
+                        cont_ticks += (aux.ticks - q);
+                        Tp = Tr/cont_ticks;
                         c.procesar(aux, q);
-                        aux.llegada = cont;
+                        aux.llegada = t_procesador;
                         aux.espera = aux.espera + te;
                         Thread.sleep(1000 * q);
                         //c.procesar(aux, q);
@@ -76,14 +82,19 @@ public class RoundRobin implements Runnable {
                         bandera = true;
                     } else {
                         System.out.println("entra al elseeeeeeeeeeeeee");
-                        int te = cont - aux.llegada;
+                        Resultados = aux.nombre + ": TE: " + (t_procesador - aux.llegada) + " Ticks: " + aux.ticks
+                                + " Llegada: " + aux.llegada;
+                        System.out.println("\n"+Resultados);
+                        cont_ticks += aux.ticks;
+                        int te = t_procesador - aux.llegada;
                         Te += (te + aux.espera); 
-                        
+                        //int tr = te + cont_ticks;
+                        Tr = Te + cont_ticks; 
                         Thread.sleep(1000 * aux.ticks);
                        c.procesar(aux, aux.ticks);
                         Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
-                                + "llegada: " + aux.llegada;
-                        System.out.println("\n"+Resultados);
+                                + " Llegada: " + aux.llegada;
+                        //System.out.println("\n"+Resultados);
                          numProcesos++;
                         while (!bandera) {
                             System.out.println("haz nada");
