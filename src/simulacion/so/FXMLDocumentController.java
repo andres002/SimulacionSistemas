@@ -9,6 +9,7 @@ import Algoritmos.ColasMultiNivel;
 import Algoritmos.FCFS;
 import Algoritmos.Prioridad;
 import Algoritmos.RoundRobin;
+import static Algoritmos.RoundRobin.cont_ticks;
 import Algoritmos.SJF;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -233,7 +234,7 @@ public class FXMLDocumentController implements Initializable {
         }
         
         resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos) +"\n"+"\n\nTiempo de respuesta: "+(Tr/numProcesos)
-                +"\n"+"\n\nTiempo de penalizacion: "+(Tp/numProcesos));
+                +"\n"+"\n\nTiempo de penalizacion: "+((Tr/numProcesos))/cont_ticks);
         
         //System.out.println("\n\nTiempo de espera promedio: " + (Te/numProcesos));
     }

@@ -58,14 +58,13 @@ public class RoundRobin implements Runnable {
                     Proceso aux = colaProcesos.get(0); 
                     bandera = true;
                     if ((aux.ticks - q) > 0) {
-                         int te = t_procesador - aux.llegada;
-                        //Te = Te + te;
-                        //numProcesos++;
-                        int tr = te + cont_ticks; 
+                        int te = t_procesador - aux.llegada;
                         Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
                                 + " Llegada: " + aux.llegada;
+                        //Te = Te + te;
+                        //numProcesos++;
                         System.out.println("\n" + Resultados);
-                        cont_ticks += (aux.ticks - q);
+                        cont_ticks += (aux.ticks -(aux.ticks - q));
                         Tp = Tr/cont_ticks;
                         c.procesar(aux, q);
                         aux.llegada = t_procesador;
@@ -92,8 +91,8 @@ public class RoundRobin implements Runnable {
                         Tr = Te + cont_ticks; 
                         Thread.sleep(1000 * aux.ticks);
                        c.procesar(aux, aux.ticks);
-                        Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
-                                + " Llegada: " + aux.llegada;
+                        //Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
+                          //      + " Llegada: " + aux.llegada;
                         //System.out.println("\n"+Resultados);
                          numProcesos++;
                         while (!bandera) {
