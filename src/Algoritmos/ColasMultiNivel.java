@@ -39,7 +39,7 @@ public class ColasMultiNivel implements Runnable {
     ArrayList<Proceso> tipo_3 = new ArrayList();
     Integer q;
 
-    public void algoritmo() {
+  /*  public void algoritmo() {
         Core c = new Core();
         while (!bandera) {
             System.out.println("haz nada algoritmo");
@@ -151,12 +151,12 @@ public class ColasMultiNivel implements Runnable {
              aux = colaProcesos.get(i);
              temp = aux.tipo;
              }
-             }*/
+             }
 
             // c.procesar(aux, aux.tipo);
             // colaProcesos.remove(aux);
         }
-    }
+    }*/
 
     public void activaHilo() {
         T5 = new Thread(new ColasMultiNivel());
@@ -176,9 +176,8 @@ public class ColasMultiNivel implements Runnable {
             while (!bandera) {
                 System.out.print("");
             }
-            bandera = false;
             if (!colaProcesos.isEmpty()) {
-                bandera = true;
+            
                 ///////////// OBTIENE LOS PROCESOS DE LA COLA PADRE Y LOS ALMACENA EN SU RESPECTIVA COLA (inicio)
                 while (!colaProcesos.isEmpty()) {
                     while (!bandera) {
