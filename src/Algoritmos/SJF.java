@@ -5,6 +5,7 @@
  */
 package Algoritmos;
 
+import static Algoritmos.RoundRobin.cont_ticks;
 import Procesos.Core;
 import Procesos.Proceso;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
@@ -77,7 +78,8 @@ public class SJF implements Runnable {
                     Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
                             + " Llegada: " + aux.llegada+ " Tr: "+ tr + " Tp: "
                             + tp;
-                    Tr += tr + aux.ticks;
+                    Tr += te + aux.ticks;
+                    cont_ticks += aux.ticks;
                     Tp += (te + aux.ticks) / aux.ticks;
                     System.out.println("\n" + Resultados);
                      Thread.sleep(1000*aux.ticks);

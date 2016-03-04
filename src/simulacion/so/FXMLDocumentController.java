@@ -177,6 +177,10 @@ public class FXMLDocumentController implements Initializable {
             rbPrioridad.setDisable(false);
             rbRR.setDisable(false);
             rbCM.setDisable(false);
+            System.out.println("Tp: "+Tp);
+            System.out.println("Cont_ticks: "+cont_ticks);
+            resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos) +"\n"+"\n\nTiempo de respuesta: "+(Tr/numProcesos)
+                +"\n"+"\n\nTiempo de penalizacion: "+((Tr/numProcesos)/cont_ticks));
         }
         if (rbSJF.isSelected()) {
             //s.asesinaHilo();
@@ -192,6 +196,8 @@ public class FXMLDocumentController implements Initializable {
             rbRR.setDisable(false);
             rbFCFS.setDisable(false);
             rbCM.setDisable(false);
+            resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos) +"\n"+"\n\nTiempo de respuesta: "+(Tr/numProcesos)
+                +"\n"+"\n\nTiempo de penalizacion: "+((Tr/numProcesos)/cont_ticks));
         }
         if (rbPrioridad.isSelected()) {
            
@@ -206,6 +212,8 @@ public class FXMLDocumentController implements Initializable {
             rbRR.setDisable(false);
             rbFCFS.setDisable(false);
             rbCM.setDisable(false);
+            resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos) +"\n"+"\n\nTiempo de respuesta: "+(Tr/numProcesos)
+                +"\n"+"\n\nTiempo de penalizacion: "+((Tr/numProcesos)/cont_ticks));
         }
         if (rbRR.isSelected()) {
             while(!pararproceso){
@@ -220,6 +228,8 @@ public class FXMLDocumentController implements Initializable {
             rbPrioridad.setDisable(false);
             rbFCFS.setDisable(false);
             rbCM.setDisable(false);
+            resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos) +"\n"+"\n\nTiempo de respuesta: "+(Tr/numProcesos)
+                +"\n"+"\n\nTiempo de penalizacion: "+((Tr/numProcesos))/cont_ticks);
         }
         if (rbCM.isSelected()) {
             while(!pararproceso){
@@ -237,8 +247,6 @@ public class FXMLDocumentController implements Initializable {
             rbCM.setDisable(false);
         }
         
-        resultados.setText("\n\nTiempo de espera promedio: " + (Te/numProcesos) +"\n"+"\n\nTiempo de respuesta: "+(Tr/numProcesos)
-                +"\n"+"\n\nTiempo de penalizacion: "+((Tr/numProcesos))/cont_ticks);
         
         //System.out.println("\n\nTiempo de espera promedio: " + (Te/numProcesos));
     }
