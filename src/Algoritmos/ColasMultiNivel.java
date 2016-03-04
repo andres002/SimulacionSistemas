@@ -250,7 +250,7 @@ public class ColasMultiNivel implements Runnable {
                             Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
-                        tipo_0.add(tipo_0.get(0));
+                        colaProcesos.add(tipo_0.get(0));
                         tipo_0.remove(0);
 
                     } else {
