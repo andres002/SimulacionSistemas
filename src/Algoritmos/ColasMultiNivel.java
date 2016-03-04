@@ -56,7 +56,12 @@ public class ColasMultiNivel implements Runnable {
                 int tipo = colaProcesos.get(0).tipo;
                 bandera = true;
                 if (tipo == 0) {
+                      while (!bandera) {
+                        System.out.println("haz nada algoritmo");
+                    }
+                    bandera = false;
                     tipo_0.add(colaProcesos.get(0));
+                    bandera = true;
                 }
                 if (tipo == 1) {
                     while (!bandera) {
@@ -168,56 +173,56 @@ public class ColasMultiNivel implements Runnable {
         while (true) {
             int i = 1;
                 Core c = new Core();
-                /*while (!bandera) {
+                while (!bandera) {
                     System.out.print("");
-                }*/
-                //bandera = false;
+                }
+                bandera = false;
                 if (!colaProcesos.isEmpty()) {
-              // bandera = false;
+                bandera = true;
                     ////////////////////
                     while (!colaProcesos.isEmpty()) {
-                        /*while (!bandera) {
+                        while (!bandera) {
                             System.out.print("");
-                        }*/
-                        //bandera = false;
+                        }
+                        bandera = false;
                         int tipo = colaProcesos.get(0).tipo;
-                        //bandera = true;
+                        bandera = true;
                         if (tipo == 0) {
-                            /*while (!bandera) {
+                            while (!bandera) {
                                 System.out.print("");
-                            }*/
-                            //bandera = false;
+                            }
+                            bandera = false;
                             tipo_0.add(colaProcesos.get(0));
-                            //bandera = true;
+                            bandera = true;
                         } else if (tipo == 1) {
-                            /*while (!bandera) {
+                            while (!bandera) {
                                 System.out.print("");
-                            }*/
-                            //bandera = false;
+                            }
+                            bandera = false;
                             tipo_1.add(colaProcesos.get(0));
-                            //bandera = true;
+                            bandera = true;
                         } else if (tipo == 2) {
-                            /*while (!bandera) {
+                            while (!bandera) {
                                 System.out.print("");
-                            }*/
-                            //bandera = false;
+                            }
+                            bandera = false;
                             tipo_2.add(colaProcesos.get(0));
-                            //bandera = true;
+                            bandera = true;
                         } else if (tipo == 3) {
-                            /*while (!bandera) {
+                            while (!bandera) {
                                 System.out.print("");
-                            }*/
-                            //bandera = false;
+                            }
+                            bandera = false;
                             tipo_3.add(colaProcesos.get(0));
-                            //bandera = true;
+                            bandera = true;
                         }
                         System.out.println("Proceso 0: " + colaProcesos.size());
-                        /*while (!bandera) {
+                        while (!bandera) {
                             System.out.print("");
-                        }*/
-                        //bandera = false;
+                        }
+                        bandera = false;
                         colaProcesos.remove(0);
-                        //bandera = true;
+                        bandera = true;
                        // System.out.println("procesando..");
                     }
         //bandera = true;
@@ -243,8 +248,12 @@ public class ColasMultiNivel implements Runnable {
                             c.procesar(aux, q);
                             aux.llegada = t_procesador;
                             aux.espera = aux.espera + te;
-                            //Thread.sleep(1000 * q);
-                            //c.procesar(aux, q);
+                            try {
+                                Thread.sleep(1000 * q);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            c.procesar(aux, q);
                             /*while (!bandera) {
                                 System.out.println("haz nada");
                             }*/
@@ -265,7 +274,11 @@ public class ColasMultiNivel implements Runnable {
                                 //int tr = te + cont_ticks;
                                 Tr = Te + cont_ticks;
                                 System.out.println("Aux.ticks: "+aux.ticks);
-                                //Thread.sleep(1000 * aux.ticks);
+                            try {
+                                Thread.sleep(1000 * aux.ticks);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                                c.procesar(aux, aux.ticks);
                                 //Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
                                   //      + " Llegada: " + aux.llegada;
