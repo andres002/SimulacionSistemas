@@ -179,7 +179,7 @@ public class ColasMultiNivel implements Runnable {
                 bandera = false;
                 if (!colaProcesos.isEmpty()) {
                 bandera = true;
-                    ////////////////////
+                    ///////////// OBTIENE LOS PROCESOS DE LA COLA PADRE Y LOS ALMACENA EN SU RESPECTIVA COLA (inicio)
                     while (!colaProcesos.isEmpty()) {
                         while (!bandera) {
                             System.out.print("");
@@ -223,17 +223,14 @@ public class ColasMultiNivel implements Runnable {
                         bandera = false;
                         colaProcesos.remove(0);
                         bandera = true;
-                       // System.out.println("procesando..");
                     }
-        //bandera = true;
-            //////////////////
-                    ///////////////////
+             ///////////// OBTIENE LOS PROCESOS DE LA COLA PADRE Y LOS ALMACENA EN SU RESPECTIVA COLA (fin)
+        
                     q = Integer.parseInt(quantum);
-                 // bandera = false;
+                    
+                    ////////////COMIENZA ROUND ROBIN CON PROCESOS TIPO 0 (inicio)
                     if (!tipo_0.isEmpty()) {
-                        //System.out.println("Numero de procesos de tipo 0: " + tipo_0.size());
-                        //Thread.sleep(1000 * tipo_0.get(0).ticks);
-                        // System.out.println("ijhuyhuyh  "+ q);
+                        
                         
                         Proceso aux = tipo_0.get(0);
                         
@@ -253,58 +250,48 @@ public class ColasMultiNivel implements Runnable {
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            c.procesar(aux, q);
-                            /*while (!bandera) {
-                                System.out.println("haz nada");
-                            }*/
-                            //bandera = false;
+                           
                             tipo_0.add(tipo_0.get(0));
                             tipo_0.remove(0);
 
-                           //bandera = true;
-                            //c.procesar(tipo_0.get(0), q);
                         } else {
-                            //System.out.println("entra al elseeeeeeeeeeeeee");
+                            System.out.println("entra al elseeeeeeeeeeeeee");
                         Resultados = aux.nombre + ": TE: " + (t_procesador - aux.llegada) + " Ticks: " + aux.ticks
                                 + " Llegada: " + aux.llegada;
-                                System.out.println("\n"+Resultados);
-                                cont_ticks += aux.ticks;
-                                int te = t_procesador - aux.llegada;
-                                Te += (te + aux.espera); 
-                                //int tr = te + cont_ticks;
-                                Tr = Te + cont_ticks;
-                                System.out.println("Aux.ticks: "+aux.ticks);
+                        System.out.println("\n"+Resultados);
+                        cont_ticks += aux.ticks;
+                        int te = t_procesador - aux.llegada;
+                        Te += (te + aux.espera); 
+                        Tr = Te + cont_ticks; 
                             try {
                                 Thread.sleep(1000 * aux.ticks);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                               c.procesar(aux, aux.ticks);
-                                //Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks
-                                  //      + " Llegada: " + aux.llegada;
-                                //System.out.println("\n"+Resultados);
-                                 numProcesos++;
-                                /*while (!bandera) {
-                                    System.out.println("haz nada");
-                                }*/
-                                // bandera = false;
-                                tipo_0.remove(0);
-                                // bandera = true;
+                       c.procesar(aux, aux.ticks);
+                       
+                         numProcesos++;
+                        while (!bandera) {
+                            System.out.println("haz nada");
                         }
-                        //c.procesar(tipo_0.get(0), tipo_0.get(0).ticks);
-                        //tipo_0.remove(0);
-
-                    } else if (!tipo_1.isEmpty()) {
+                         bandera = false;
+                        colaProcesos.remove(0);
+                         bandera = true;
+                        }
+                       
+                       
+                    } 
+                     ////////////COMIENZA ROUND ROBIN CON PROCESOS TIPO 0 (inicio)
+                    
+                    
+                     ///////////COMIENZA PRIORIDAD CON PROCESOS TIPO 1 (inicio)
+                    else if (!tipo_1.isEmpty()) {
                         System.out.println("Numero de procesos de tipo 1: " + tipo_1.size());
-                        //Thread.sleep(1000 * tipo_1.get(0).ticks);
                         
                          Proceso aux,aux2;
-                            // int i=1;
                              aux = tipo_1.get(0);
                              int temp = aux.tipo;
-                             //bandera = false;
                              int limite = tipo_1.size();
-                            // bandera = true;
 
                              for ( recorrido = 1; recorrido < limite; recorrido++) {
                                  aux2 = tipo_1.get(recorrido);
@@ -313,9 +300,6 @@ public class ColasMultiNivel implements Runnable {
                                      //temp = aux.tipo;
                                  }
                             }
-                             /*while (!bandera) {
-                                 System.out.println("haz nada");
-                             }*/
                               try {
                                 int te = cont - aux.llegada;
                                 double tr = te + aux.ticks;
@@ -336,25 +320,28 @@ public class ColasMultiNivel implements Runnable {
                             c.procesar(aux, aux.ticks);
                             tipo_1.remove(aux);
                        
-                    } else if (!tipo_2.isEmpty()) {
+                    }
+                    ///////////COMIENZA PRIORIDAD CON PROCESOS TIPO 1 (fin)
+                    
+                    
+                    /////////COMIENZA FCFS CON PROCESOS TIPO 2 (inicio)
+                    else if (!tipo_2.isEmpty()) {
                         System.out.println("Numero de procesos de tipo 2: " + tipo_2.size());
-                        //Thread.sleep(1000 * tipo_2.get(0).ticks);
                         c.procesar(tipo_2.get(0), tipo_2.get(0).ticks);
                         tipo_2.remove(0);
-                        //return;
-                    } else if (!tipo_3.isEmpty()) {
+                    }                  
+                    /////////COMIENZA FCFS CON PROCESOS TIPO 2 (fin)
+                    
+                    /////////COMIENZA FCFS CON PROCESOS TIPO 3 (inicio)
+                    else if (!tipo_3.isEmpty()) {
                         System.out.println("Numero de procesos de tipo 3: " + tipo_3.size());
-                        //Thread.sleep(1000 * tipo_3.get(0).ticks);
                         c.procesar(tipo_3.get(0), tipo_3.get(0).ticks);
                         tipo_3.remove(0);
-                        // return;
                     }
-                    
-                  //bandera = true;  
+                    /////////COMIENZA FCFS CON PROCESOS TIPO 3 (fin) 
            
                 }
-                //bandera = true;
-                
+                ////////////////SI TODAS LAS COLAS DE PROCESOS ESTAN VACIAS SE CAMBIA LA BANDERA
                 if(tipo_0.isEmpty() && tipo_1.isEmpty()&& tipo_2.isEmpty() && tipo_3.isEmpty()){
                     if(parar){
                         System.out.println("Se terminaron los procesos");
@@ -362,10 +349,7 @@ public class ColasMultiNivel implements Runnable {
                         return;
                     }
                 }
-                
 
-
-            i = 1;
         }
 
     }
