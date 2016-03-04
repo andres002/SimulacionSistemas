@@ -179,14 +179,16 @@ public class ColasMultiNivel implements Runnable {
                 System.out.println("Cosa :v");
             }
             if (!colaProcesos.isEmpty()) {
-            
+                
                 ///////////// OBTIENE LOS PROCESOS DE LA COLA PADRE Y LOS ALMACENA EN SU RESPECTIVA COLA (inicio)
                 while (!colaProcesos.isEmpty()) {
+                    System.out.println("primera comparacion");
                     while (!bandera) {
                         System.out.print("me atore :p");
                     }
                     bandera = false;
                     int tipo = colaProcesos.get(0).tipo;
+                    System.out.println("saco el tipo");
                     bandera = true;
                     if (tipo == 0) {
                         System.out.println("Inserto proceso en cola 0");
@@ -254,8 +256,12 @@ public class ColasMultiNivel implements Runnable {
                         } catch (InterruptedException ex) {
                             Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
+                         while (!bandera) {
+                            System.out.print("");
+                        }
+                        bandera = false;
                         colaProcesos.add(aux);
+                        bandera = true;
                         tipo_0.remove(0);
 
                     } else {
@@ -267,11 +273,14 @@ public class ColasMultiNivel implements Runnable {
                         int te = t_procesador - aux.llegada;
                         Te += (te + aux.espera);
                         Tr = Te + cont_ticks;
+                        System.out.println("llega a esta parte del elseeeee");
                         try {
                             Thread.sleep(1000 * aux.ticks);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        
+                        System.out.println("esto es despues de que se duerme el hilo");
                         c.procesar(aux, aux.ticks);
 
                         numProcesos++;
@@ -281,6 +290,7 @@ public class ColasMultiNivel implements Runnable {
                         bandera = false;
                         tipo_0.remove(aux);
                         bandera = true;
+                        System.out.println("esto es despues de remover de la 0");
                     }
 
                 } ////////////COMIENZA ROUND ROBIN CON PROCESOS TIPO 0 (inicio)
