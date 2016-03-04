@@ -170,23 +170,26 @@ public class ColasMultiNivel implements Runnable {
 
     @Override
     public void run() {
+        Core c = new Core();
+        q = Integer.parseInt(quantum);
         while (true) {
             int i = 1;
-            Core c = new Core();
+            
             while (!bandera) {
-                System.out.print("");
+                System.out.println("Cosa :v");
             }
             if (!colaProcesos.isEmpty()) {
             
                 ///////////// OBTIENE LOS PROCESOS DE LA COLA PADRE Y LOS ALMACENA EN SU RESPECTIVA COLA (inicio)
                 while (!colaProcesos.isEmpty()) {
                     while (!bandera) {
-                        System.out.print("");
+                        System.out.print("me atore :p");
                     }
                     bandera = false;
                     int tipo = colaProcesos.get(0).tipo;
                     bandera = true;
                     if (tipo == 0) {
+                        System.out.println("Inserto proceso en cola 0");
                         while (!bandera) {
                             System.out.print("");
                         }
@@ -194,6 +197,7 @@ public class ColasMultiNivel implements Runnable {
                         tipo_0.add(colaProcesos.get(0));
                         bandera = true;
                     } else if (tipo == 1) {
+                        System.out.println("Inserto proceso en cola 1");
                         while (!bandera) {
                             System.out.print("");
                         }
@@ -201,6 +205,7 @@ public class ColasMultiNivel implements Runnable {
                         tipo_1.add(colaProcesos.get(0));
                         bandera = true;
                     } else if (tipo == 2) {
+                        System.out.println("Inserto proceso en cola 2");
                         while (!bandera) {
                             System.out.print("");
                         }
@@ -208,6 +213,7 @@ public class ColasMultiNivel implements Runnable {
                         tipo_2.add(colaProcesos.get(0));
                         bandera = true;
                     } else if (tipo == 3) {
+                        System.out.println("Inserto proceso en cola 3");
                         while (!bandera) {
                             System.out.print("");
                         }
@@ -225,7 +231,7 @@ public class ColasMultiNivel implements Runnable {
                 }
                 ///////////// OBTIENE LOS PROCESOS DE LA COLA PADRE Y LOS ALMACENA EN SU RESPECTIVA COLA (fin)
 
-                q = Integer.parseInt(quantum);
+                
 
                 ////////////COMIENZA ROUND ROBIN CON PROCESOS TIPO 0 (inicio)
                 if (!tipo_0.isEmpty()) {
@@ -273,7 +279,7 @@ public class ColasMultiNivel implements Runnable {
                             System.out.println("haz nada");
                         }
                         bandera = false;
-                        tipo_0.remove(0);
+                        tipo_0.remove(aux);
                         bandera = true;
                     }
 
@@ -284,9 +290,15 @@ public class ColasMultiNivel implements Runnable {
                    // System.out.println("Numero de procesos de tipo 1: " + tipo_1.size());
 
                     Proceso aux, aux2;
+                    bandera = false;
                     aux = tipo_1.get(0);
+                    bandera = true;
+                    
                     int temp = aux.tipo;
+                    
+                    bandera = false;
                     int limite = tipo_1.size();
+                    bandera = true;
 
                     for (recorrido = 1; recorrido < limite; recorrido++) {
                         aux2 = tipo_1.get(recorrido);
@@ -318,32 +330,47 @@ public class ColasMultiNivel implements Runnable {
                 } ///////////COMIENZA PRIORIDAD CON PROCESOS TIPO 1 (fin)
                 /////////COMIENZA FCFS CON PROCESOS TIPO 2 (inicio)
                 else if (!tipo_2.isEmpty()) {
-                     System.out.println("Atiende proceso tipo 2");
-                    //System.out.println("Numero de procesos de tipo 2: " + tipo_2.size());
-                     Proceso aux = tipo_2.get(0);
-                    c.procesar(aux, aux.ticks);
-                    tipo_2.remove(0);
-                } /////////COMIENZA FCFS CON PROCESOS TIPO 2 (fin)
+                    try {
+                        System.out.println("Atiende proceso tipo 2");
+                        //System.out.println("Numero de procesos de tipo 2: " + tipo_2.size());
+                        Proceso aux = tipo_2.get(0);
+                        Thread.sleep(1000 * aux.ticks);
+                        c.procesar(aux, aux.ticks);
+                        tipo_2.remove(0);
+                    } /////////COMIENZA FCFS CON PROCESOS TIPO 2 (fin)
+                    catch (InterruptedException ex) {
+                        Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 /////////COMIENZA FCFS CON PROCESOS TIPO 3 (inicio)
                 else if (!tipo_3.isEmpty()) {
-                     System.out.println("Atiende proceso tipo 3");
-                     Proceso aux = tipo_3.get(0);
-                   // System.out.println("Numero de procesos de tipo 3: " + tipo_3.size());
-                    c.procesar(aux, aux.ticks);
-                    tipo_3.remove(0);
+                    try {
+                        System.out.println("Atiende proceso tipo 3");
+                        Proceso aux = tipo_3.get(0);
+                        // System.out.println("Numero de procesos de tipo 3: " + tipo_3.size());
+                        Thread.sleep(1000 * aux.ticks);
+                        c.procesar(aux, aux.ticks);
+                        tipo_3.remove(0);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ColasMultiNivel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 /////////COMIENZA FCFS CON PROCESOS TIPO 3 (fin) 
 
             }
+            else{
+            //System.out.println("NO HAY PROCESOS POR INSERTAR");
             ////////////////SI TODAS LAS COLAS DE PROCESOS ESTAN VACIAS SE CAMBIA LA BANDERA
-            if(tipo_0.isEmpty() && tipo_1.isEmpty()&& tipo_2.isEmpty() && tipo_3.isEmpty()){
+              if(tipo_0.isEmpty() && tipo_1.isEmpty()&& tipo_2.isEmpty() && tipo_3.isEmpty()){
            // if (colaProcesos.isEmpty()) {  //creo que la correcta es esta, porque se puede dar la ocasión de que quede un huerfanito en la proceos
+               // System.out.println("Creo que no he terminado :(");
                 if (parar) {
                     System.out.println("Se terminaron los procesos");
                     pararproceso = true;
                     return;
                 }
             }
+        }   
 
         }
 
