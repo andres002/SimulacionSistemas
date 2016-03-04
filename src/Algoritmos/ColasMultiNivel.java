@@ -331,8 +331,8 @@ public class ColasMultiNivel implements Runnable {
 
             }
             ////////////////SI TODAS LAS COLAS DE PROCESOS ESTAN VACIAS SE CAMBIA LA BANDERA
-            //if(tipo_0.isEmpty() && tipo_1.isEmpty()&& tipo_2.isEmpty() && tipo_3.isEmpty()){  Tu condicion era esta
-            if (colaProcesos.isEmpty()) {  //creo que la correcta es esta, porque se puede dar la ocasión de que quede un huerfanito en la proceos
+            if(tipo_0.isEmpty() && tipo_1.isEmpty()&& tipo_2.isEmpty() && tipo_3.isEmpty()){
+           // if (colaProcesos.isEmpty()) {  //creo que la correcta es esta, porque se puede dar la ocasión de que quede un huerfanito en la proceos
                 if (parar) {
                     System.out.println("Se terminaron los procesos");
                     pararproceso = true;
