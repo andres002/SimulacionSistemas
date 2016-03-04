@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Algoritmos;
+import static Algoritmos.RoundRobin.cont_ticks;
 import static simulacion.so.FXMLDocumentController.colaProcesos;
 import Procesos.Core;
 import static Procesos.Core.bandera;
@@ -70,6 +71,7 @@ public class FCFS  implements Runnable{
                     System.out.println("despues de dormir");
                     //fx.setResultados();
                     c.procesar(colaProcesos.get(0), colaProcesos.get(0).ticks);
+                    cont_ticks += colaProcesos.get(0).ticks;
                     colaProcesos.remove(0);
                 }else{
                 if(parar){

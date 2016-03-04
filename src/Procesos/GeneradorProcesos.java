@@ -35,9 +35,9 @@ public class GeneradorProcesos implements Runnable {
                 if (posibleTipo <= 0.25) {    // Procesos de Sistema
 
                     posiblePrioriodad = rnd.nextInt(4) + 1;
-                    while (!bandera) {
-                        System.out.println("haz nada procesos");
-                    }
+                    /*while (!bandera) {
+                        System.out.print("");
+                    }*/
                     bandera = false;
                     colaProcesos.add(new Proceso(posibleTick, 0, posiblePrioriodad, "P" + cont, cont));
                     bandera = true;

@@ -118,8 +118,7 @@ public class FXMLDocumentController implements Initializable {
             rbPrioridad.setDisable(true);
             rbRR.setDisable(true);
             rbFCFS.setDisable(true);
-            g.activaHilo();
-            cm.activaHilo();
+            
             
             if (txtQuantum.getText() == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -132,8 +131,8 @@ public class FXMLDocumentController implements Initializable {
                 txtQuantum.setDisable(true);
                 this.quantum = txtQuantum.getText();
                 System.out.println("Valor de quantum: "+quantum);
-                g.activaHilo();
-                rr.activaHilo();
+               g.activaHilo();
+                cm.activaHilo();
             }
         }
         //System.out.println("algo---" + colaProcesos.get(0).nombre);
@@ -223,7 +222,12 @@ public class FXMLDocumentController implements Initializable {
             rbCM.setDisable(false);
         }
         if (rbCM.isSelected()) {
+            while(!pararproceso){
+                System.out.print("");
+            }
+            System.out.println("Se terminaron los procesos");
             cm.asesinaHilo();
+            g.asesinaHilo();
             btnIniciar.setDisable(false);
             txtQuantum.setDisable(false);
             rbSJF.setDisable(false);
