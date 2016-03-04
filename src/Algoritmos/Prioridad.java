@@ -5,6 +5,7 @@
  */
 package Algoritmos;
 
+import static Algoritmos.RoundRobin.cont_ticks;
 import Procesos.Core;
 import static Procesos.Core.bandera;
 import Procesos.Proceso;
@@ -77,8 +78,8 @@ static int recorrido;
                     Resultados = aux.nombre + ": TE: " + te + " Ticks: " + aux.ticks + "Prioridad: "+aux.tipo
                             + " Llegada: " + aux.llegada + " Tr: "+ tr + " Tp: "
                             + tp;
+                    cont_ticks += aux.ticks;
                     Tr += te + aux.ticks;
-                    Tp += (te + aux.ticks) / aux.ticks;                    
                     System.out.println("\n" + Resultados);
                     Thread.sleep(1000 * aux.ticks);
                 } catch (InterruptedException ex) {

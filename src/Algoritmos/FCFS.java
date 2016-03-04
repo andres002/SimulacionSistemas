@@ -70,8 +70,8 @@ public class FCFS  implements Runnable{
                     Thread.sleep(1000 * colaProcesos.get(0).ticks);
                     System.out.println("despues de dormir");
                     //fx.setResultados();
-                    c.procesar(colaProcesos.get(0), colaProcesos.get(0).ticks);
                     cont_ticks += colaProcesos.get(0).ticks;
+                    c.procesar(colaProcesos.get(0), colaProcesos.get(0).ticks);
                     colaProcesos.remove(0);
                 }else{
                 if(parar){
